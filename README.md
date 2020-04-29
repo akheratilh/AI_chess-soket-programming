@@ -5,7 +5,7 @@
 #### you can change background by changing chess_board.set_template('wood') argument (wood or normal) from GUI.py file
 
 ### wood
-![alt text](https://github.com/akherati56/AI_chess/git-image/wood.jpg)
+![alt text](https://github.com/akherati56/AI_chess/git-image/wood.png)
 
 ### normal
-![alt text](https://github.com/akherati56/AI_chess/git-image/normal.jpg)
+![alt text](https://github.com/akherati56/AI_chess/git-image/normal.png)
