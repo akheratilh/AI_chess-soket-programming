@@ -1,4 +1,5 @@
 import pygame 
+from threading import Thread
 
 pygame.init()
 width , height = 800 , 800

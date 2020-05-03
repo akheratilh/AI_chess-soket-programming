@@ -1,15 +1,20 @@
 from pieces import *
-from sound.sound import Sound
+from sound.sound import Sound 
 from threading import Thread
 
-class Anime(): 
+class Anime(Thread): 
     def __init__(self , Board):
+        Thread.__init__(self)
         self.S = Sound('sound/move.mp3')
+        self.S.start()
         self.boardClass = Board
         self.position = None
         self.type = None
         self.next_position = None
         
+    def run(self):
+        pass
+
     def move(self ,speed):
         if speed ==0 :
             self.boardClass.board[0][0] =0

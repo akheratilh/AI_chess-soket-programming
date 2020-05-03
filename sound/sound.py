@@ -1,10 +1,14 @@
 import pygame
+from threading import Thread
 
-class Sound():
+class Sound(Thread):
     def __init__(self, path):
+        Thread.__init__(self)
         self.path = path
-        pygame.mixer.music.load(self.path)  
         
+    def run(self):
+        pygame.mixer.music.load(self.path)  
+
     def load(self):
         pygame.mixer.music.load(self.path)      
     

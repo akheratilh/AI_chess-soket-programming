@@ -1,8 +1,7 @@
 from pieces import *
 from board import Board
-from move import Move
-from anime import Anime
-from threading import Thread
+from move import Move , Thread
+from anime import Anime 
 
 class GUI():
     def __init__(self):    
@@ -12,8 +11,10 @@ class GUI():
          
         chess_board.set_template('wood')
         m = Move()
+        m.start()
 
-        animation = Anime(chess_board) 
+        animation = Anime(chess_board)
+        animation.start() 
         flag_move = 0 
 
         history = [] 

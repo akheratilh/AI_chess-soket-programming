@@ -1,5 +1,5 @@
 from Graphic.GUI import GUI , pygame
-from threading import Thread
+from threading import Thread ,active_count
      
 def main():   
     print "##############   help   ##############"
@@ -7,7 +7,8 @@ def main():
     print "# 2. pres Q to quit game             #"
     print "# 3. pres Z to undo last move        #"
     print "######################################"
-    g = GUI() 
-     
+    g = GUI()  
+    
+    
 if __name__ == "__main__":
     main()
