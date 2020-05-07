@@ -1,7 +1,7 @@
 from pieces import *
 from board import Board
-from move import Move , Thread
 from anime import Anime 
+from algorithm.move import Move , Thread
 
 class GUI():
     def __init__(self):    
