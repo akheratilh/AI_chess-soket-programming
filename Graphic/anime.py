@@ -5,17 +5,17 @@ from threading import Thread
 class Anime(Thread): 
     def __init__(self , Board):
         Thread.__init__(self)
-        self.S = Sound('sound/move.mp3')
-        self.S.start()
-        self.boardClass = Board
-        self.position = None
-        self.type = None
-        self.next_position = None
+        self.S = Sound('sound/move.mp3')    # pieces move sound
+        self.S.start()  # initialize move sound in difrent thread to have immediately sound
+        self.boardClass = Board #get Board object from arguments
+        self.position = None    #pieces position
+        self.type = None    #black / white
+        self.next_position = None   
         
     def run(self):
         pass
 
-    def move(self ,speed):
+    def move(self ,speed):  #TO DO
         if speed ==0 :
             self.boardClass.board[0][0] =0
         p = Pieces()
@@ -25,9 +25,9 @@ class Anime(Thread):
     def set_pos(self , position):
         self.position = position
     
-    def set_pos_digit(self , position):
+    def set_pos_digit(self , position): #get position on board 
         x , y = position
-        x = int(round(x/100))
+        x = int(round(x/100))   
         y = int(round(y/100))
         self.position = [x , y] 
     
@@ -36,7 +36,7 @@ class Anime(Thread):
         self.boardClass.board[self.position[0]][self.position[1]] = 0
 
     def drag_init(self):
-        x , y = pygame.mouse.get_pos()
+        x , y = pygame.mouse.get_pos()  
         self.set_pos_digit([y , x])
         self.get_type() 
 
@@ -61,7 +61,7 @@ class Anime(Thread):
     def drag_succed(self): 
         self.boardClass.board[self.position[0]][self.position[1]] = self.type
 
-    def highlight(self , position):
+    def highlight(self , position): # highlight where the position is
         x , y = position
         x = int(round(x/100))
         y = int(round(y/100))
@@ -70,3 +70,4 @@ class Anime(Thread):
     def highlight_possible_move(self , possible_move):
         for move in possible_move:
             pygame.draw.rect(screen, BLUE, (100 * move[0], 100 * move[1], 100 , 100))
+            

@@ -14,37 +14,39 @@ class Move(Thread):
     def set_value(self , type_name , position):
         self.Y_position ,self.X_position = position
         self.name = type_name
-        self.is_white = self.isWhite()
+        self.is_white = self.isWhite()  
         self.type = self.name[2:]
-
+ 
     def possible_moves(self , Board , Anime):
         all_model = ['pawn','rook','knight','bishop','queen','king']
         temp = []
-        possible_move = []
-        revers_move = -1       #blak -1
+        possible_move = []  # all moves which valid for pieces to do
+        revers_move = -1       #black : -1
         if self.is_white:   
-            revers_move *= -1   #white +1
+            revers_move *= -1   #white : +1
  
-        if self.type == all_model[0]: 
-            if (self.Y_position == 0): 
+        if self.type == all_model[0]: #pawn moves :
+            if (self.Y_position == 0):  #exchange black pawn to queen at the end 
                 self.type = 'b_queen' 
                 Anime.type = 'b_queen'
                 Board.board[self.Y_position][self.X_position] = 'b_queen'  
-            if self.Y_position == 7 :
+            if self.Y_position == 7 :  #exchange white pawn to queen at the end 
                 self.type = 'w_queen' 
                 Anime.type = 'w_queen'
                 Board.board[self.Y_position][self.X_position] = 'b_queen'  
 
-            if(self.Y_position == 6 and revers_move == -1 ):
+            if(self.Y_position == 6 and revers_move == -1 ): #check if pawn doesnt move yet 
                 possible_move.append([ self.X_position , self.Y_position + (2 * revers_move)]) 
-            if(self.Y_position == 1 and revers_move == 1 ):
+            if(self.Y_position == 1 and revers_move == 1 ): #check if pawn doesnt move yet 
                 possible_move.append([ self.X_position , self.Y_position + (2 * revers_move)]) 
                                 
             possible_move.append([ self.X_position , self.Y_position + revers_move]) 
                 
-        elif self.type == all_model[1]:
+        elif self.type == all_model[1]: #rook moves :
             for x in range (1 , 8):         
                 possible_move.append([self.X_position - x  , self.Y_position]) 
+                if Board.board[self.X_position - x ][self.Y_position] != 0:
+                    break
             for x in range (1 , 8): 
                 possible_move.append([self.X_position      , self.Y_position + x]) 
             for x in range (1 , 8): 
@@ -52,7 +54,7 @@ class Move(Thread):
             for x in range (1 , 8): 
                 possible_move.append([self.X_position      , self.Y_position - x])            
 
-        elif self.type == all_model[2]:
+        elif self.type == all_model[2]: #knight moves :
             possible_move.append([self.X_position + 1 , self.Y_position - 2])
             possible_move.append([self.X_position + 1 , self.Y_position + 2])
             possible_move.append([self.X_position - 1 , self.Y_position - 2])
@@ -62,7 +64,7 @@ class Move(Thread):
             possible_move.append([self.X_position - 2 , self.Y_position + 1])
             possible_move.append([self.X_position - 2 , self.Y_position - 1])
 
-        elif self.type == all_model[3]:
+        elif self.type == all_model[3]: #bishop moves :
             for x in range (1 , 8): 
                 possible_move.append([self.X_position - x  , self.Y_position - x])  
             for x in range (1 , 8): 
@@ -72,7 +74,7 @@ class Move(Thread):
             for x in range (1 , 8): 
                 possible_move.append([self.X_position + x  , self.Y_position + x]) 
 
-        elif self.type == all_model[4]:
+        elif self.type == all_model[4]: #queen moves :
             for x in range (1 , 8): 
                 possible_move.append([self.X_position - x  , self.Y_position])
                 possible_move.append([self.X_position - x  , self.Y_position - x])
@@ -86,7 +88,7 @@ class Move(Thread):
                 possible_move.append([self.X_position      , self.Y_position - x])  
                 possible_move.append([self.X_position + x  , self.Y_position + x])   
 
-        elif self.type == all_model[5]:  
+        elif self.type == all_model[5]:  #king moves :
             possible_move.append([self.X_position + 1 , self.Y_position + 1])
             possible_move.append([self.X_position + 1 , self.Y_position - 1])
             possible_move.append([self.X_position - 1 , self.Y_position + 1])
