@@ -72,12 +72,12 @@ class Move(Thread):
                 Board.board[self.Y_position][self.X_position] = 'w_queen'  
             
             value = Board.board[self.Y_position + revers_move][self.X_position + 1]
-            print value
+            
             if (value != 0 and value[0] != self.name[0] ):
                 possible_move.append([ self.X_position + 1 , self.Y_position + revers_move]) 
             
             value = Board.board[self.Y_position + revers_move][self.X_position - 1]
-            print value
+            
             if (value != 0 and value[0] != self.name[0] ):
                 possible_move.append([ self.X_position - 1 , self.Y_position + revers_move]) 
 

@@ -3,7 +3,7 @@ from board import Board
 from anime import Anime 
 from algorithm.move import Move , Thread
 from contentText.tim import Tim 
-
+from algorithm.player import Player
 
 class GUI():
     def __init__(self):   
@@ -23,8 +23,13 @@ class GUI():
         flag_move = 0 
 
         history = [] 
-        possible_move = []        
+        possible_move = []      
 
+        p1 = Player('white')
+        p2 = Player('black')
+        p1.move()
+        p1.next_round()
+        p2.next_round()
         while not game_exit:  
             chess_board.draw_board()
             t.show()
@@ -39,16 +44,19 @@ class GUI():
                     elif event.key == pygame.K_z:
                         pass
                 elif event.type == pygame.MOUSEBUTTONDOWN:
-                    animation.drag_init()  
-                    m.set_value(str(animation.type) ,animation.position )
-                    # argument are fake and used for test
-                    possible_move = m.possible_moves(chess_board , animation)
-                    animation.highlight_possible_move(possible_move)   
-                    drag = True
+                    animation.set_type()
+                    if p2.can_move() and p2.team[0] == animation.type[0] :
+                        animation.drag_init()  
+                        m.set_value(str(animation.type) ,animation.position )
+                        possible_move = m.possible_moves(chess_board , animation)
+                        animation.highlight_possible_move(possible_move)   
+                        drag = True 
                 elif event.type == pygame.MOUSEBUTTONUP: 
                     animation.drag_done(possible_move )   #TO DO : check if is it possible to move 
                     possible_move = []
                     drag = False
+                    p1.next_round()
+                    p2.next_round()
             if drag:
                 animation.highlight_possible_move(possible_move)
                      
@@ -59,8 +67,11 @@ class GUI():
 
             if drag:                                        # i check drag two time beacuse if i merge them then in the result the draged piece show under enemy solder
                 animation.drag(pygame.mouse.get_pos())              # in the other hand if i create piece first the highlight will stay on piece so player cant see piece
-            
-            
+                   
+            if (p1.can_move()):
+                p1.move()
+                p1.next_round()
+                p2.next_round()
 
             pygame.display.flip()
             clock.tick(40)     

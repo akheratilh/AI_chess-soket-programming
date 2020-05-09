@@ -35,6 +35,11 @@ class Anime(Thread):
         self.type = self.boardClass.board[self.position[0]][self.position[1]]
         self.boardClass.board[self.position[0]][self.position[1]] = 0
 
+    def set_type(self):
+        x , y = pygame.mouse.get_pos()  
+        self.set_pos_digit([y , x])      
+        self.type = self.boardClass.board[self.position[0]][self.position[1]]
+
     def drag_init(self):
         x , y = pygame.mouse.get_pos()  
         self.set_pos_digit([y , x])
