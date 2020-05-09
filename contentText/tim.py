@@ -12,7 +12,7 @@ class Tim(Thread):
 
     def run(self): 
         global game_exit
-        while game_exit:
+        while not game_exit:
             sleep(1)
             self.counter()
 

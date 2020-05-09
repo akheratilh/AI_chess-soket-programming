@@ -98,7 +98,6 @@ class Move(Thread):
             possible_move.append([self.X_position , self.Y_position - 1])
             possible_move.append([self.X_position , self.Y_position + 1]) 
          
-        
         temp = []
         for possible in possible_move:
             if possible[0] < 8 and possible[0] >= 0 and possible[1] < 8 and possible[1] >= 0:

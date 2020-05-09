@@ -27,6 +27,7 @@ class GUI():
 
         while not game_exit:  
             chess_board.draw_board()
+            t.show()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     game_exit = True
@@ -59,7 +60,7 @@ class GUI():
             if drag:                                        # i check drag two time beacuse if i merge them then in the result the draged piece show under enemy solder
                 animation.drag(pygame.mouse.get_pos())              # in the other hand if i create piece first the highlight will stay on piece so player cant see piece
             
-            t.show()
+            
 
             pygame.display.flip()
             clock.tick(40)     
