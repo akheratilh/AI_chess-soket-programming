@@ -70,13 +70,23 @@ class Move(Thread):
                 self.type = 'w_queen' 
                 Anime.type = 'w_queen'
                 Board.board[self.Y_position][self.X_position] = 'w_queen'  
+            
+            value = Board.board[self.Y_position + revers_move][self.X_position + 1]
+            print value
+            if (value != 0 and value[0] != self.name[0] ):
+                possible_move.append([ self.X_position + 1 , self.Y_position + revers_move]) 
+            
+            value = Board.board[self.Y_position + revers_move][self.X_position - 1]
+            print value
+            if (value != 0 and value[0] != self.name[0] ):
+                possible_move.append([ self.X_position - 1 , self.Y_position + revers_move]) 
 
-            if(self.Y_position == 6 and revers_move == -1 ): #check if pawn doesnt move yet 
-                possible_move.append([ self.X_position , self.Y_position + (2 * revers_move)]) 
-            if(self.Y_position == 1 and revers_move == 1 ): #check if pawn doesnt move yet 
-                possible_move.append([ self.X_position , self.Y_position + (2 * revers_move)]) 
-                                
-            possible_move.append([ self.X_position , self.Y_position + revers_move]) 
+            if Board.board[self.Y_position + revers_move][self.X_position] == 0:
+                if(self.Y_position == 6 and revers_move == -1 ): #check if pawn doesnt move yet 
+                    possible_move.append([ self.X_position , self.Y_position + (2 * revers_move)]) 
+                if(self.Y_position == 1 and revers_move == 1 ): #check if pawn doesnt move yet 
+                    possible_move.append([ self.X_position , self.Y_position + (2 * revers_move)]) 
+                possible_move.append([ self.X_position , self.Y_position + revers_move]) 
                 
         elif self.type == all_model[2]: #knight moves :
             possible_move.append([self.X_position + 1 , self.Y_position - 2])
@@ -98,6 +108,7 @@ class Move(Thread):
             possible_move.append([self.X_position , self.Y_position - 1])
             possible_move.append([self.X_position , self.Y_position + 1]) 
          
+
         temp = []
         for possible in possible_move:
             if possible[0] < 8 and possible[0] >= 0 and possible[1] < 8 and possible[1] >= 0:
