@@ -3,7 +3,7 @@ from threading import Thread
 
 pygame.init()
 width , height = 800 , 800
-screen = pygame.display.set_mode((width, height + 200))
+screen = pygame.display.set_mode((width, height + 100))
 clock = pygame.time.Clock()
 BLUE = (0,0,255) 
 GREEN = (0,255,0) 

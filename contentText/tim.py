@@ -17,7 +17,9 @@ class Tim(Thread):
             self.counter()
 
     def show(self):
-        screen.blit(self.text, (width - 250 ,height / 2))
+        pygame.draw.rect(screen, BLACK, (0, 100 * 8, 800 , 200))
+
+        screen.blit(self.text, (50 ,825))
  
     def counter(self):
         self.sec += 1
@@ -26,4 +28,5 @@ class Tim(Thread):
             self.min += 1
             if self.min == 60:
                 self.min = 0
-        self.text = self.font.render(str(self.min)+':'+str(self.sec), True, BLACK)  
+        self.text = self.font.render(str(self.min)+':'+str(self.sec), True, WHITE)  
+        
