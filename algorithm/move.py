@@ -61,14 +61,29 @@ class Move(Thread):
                     break                
 
         elif self.type == all_model[2]: #knight moves :
-            possible_move.append([self.X_position + 1 , self.Y_position - 2])
-            possible_move.append([self.X_position + 1 , self.Y_position + 2])
-            possible_move.append([self.X_position - 1 , self.Y_position - 2])
-            possible_move.append([self.X_position - 1 , self.Y_position + 2])
-            possible_move.append([self.X_position + 2 , self.Y_position - 1])
-            possible_move.append([self.X_position + 2 , self.Y_position + 1])
-            possible_move.append([self.X_position - 2 , self.Y_position + 1])
-            possible_move.append([self.X_position - 2 , self.Y_position - 1])
+            if self.X_position + 1 < 8 and self.Y_position - 2 > 0:
+                possible_move.append([self.X_position + 1 , self.Y_position - 2])
+                
+            if self.X_position + 1 < 8 and self.Y_position + 2 < 8:
+                possible_move.append([self.X_position + 1 , self.Y_position + 2])
+                
+            if self.X_position - 1 > 0 and self.Y_position - 2 > 0:
+                possible_move.append([self.X_position - 1 , self.Y_position - 2])
+                
+            if self.X_position - 1 > 0 and  self.Y_position + 2 < 8:
+                possible_move.append([self.X_position - 1 , self.Y_position + 2])
+                
+            if self.X_position +2 < 8 and self.Y_position - 1 > 0:
+                possible_move.append([self.X_position + 2 , self.Y_position - 1])
+                
+            if self.X_position + 2 < 8 and self.Y_position + 1 < 8:
+                possible_move.append([self.X_position + 2 , self.Y_position + 1])
+                
+            if self.X_position - 2 > 0 and  self.Y_position + 1 < 8:
+                possible_move.append([self.X_position - 2 , self.Y_position + 1])
+            
+            if self.X_position - 2 > 0 and self.Y_position - 1 > 0:
+                possible_move.append([self.X_position - 2 , self.Y_position - 1])
 
         elif self.type == all_model[3]: #bishop moves :
             for x in range (1 , 8): 
