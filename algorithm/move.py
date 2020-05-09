@@ -24,25 +24,8 @@ class Move(Thread):
         revers_move = -1       #black : -1
         if self.is_white:   
             revers_move *= -1   #white : +1
- 
-        if self.type == all_model[0]: #pawn moves :
-            if (self.Y_position == 0):  #exchange black pawn to queen at the end 
-                self.type = 'b_queen' 
-                Anime.type = 'b_queen'
-                Board.board[self.Y_position][self.X_position] = 'b_queen'  
-            if self.Y_position == 7 :  #exchange white pawn to queen at the end 
-                self.type = 'w_queen' 
-                Anime.type = 'w_queen'
-                Board.board[self.Y_position][self.X_position] = 'b_queen'  
 
-            if(self.Y_position == 6 and revers_move == -1 ): #check if pawn doesnt move yet 
-                possible_move.append([ self.X_position , self.Y_position + (2 * revers_move)]) 
-            if(self.Y_position == 1 and revers_move == 1 ): #check if pawn doesnt move yet 
-                possible_move.append([ self.X_position , self.Y_position + (2 * revers_move)]) 
-                                
-            possible_move.append([ self.X_position , self.Y_position + revers_move]) 
-                
-        elif self.type == all_model[1]: #rook moves : 
+        if self.type == all_model[1] or self.type == all_model[4]:  #rook or queen moves : 
             for x in range (0 , self.X_position + 1):          #left 
                 possible_move.append([self.X_position - x  , self.Y_position]) 
                 if Board.board[self.Y_position][self.X_position - x] != 0:
@@ -58,19 +41,9 @@ class Move(Thread):
             for x in range (0 , 8 - self.Y_position ):   #down
                 possible_move.append([self.X_position      , self.Y_position + x])            
                 if Board.board[self.Y_position + x][self.X_position] != 0:
-                    break                
+                    break    
 
-        elif self.type == all_model[2]: #knight moves :
-            possible_move.append([self.X_position + 1 , self.Y_position - 2])
-            possible_move.append([self.X_position + 1 , self.Y_position + 2])
-            possible_move.append([self.X_position - 1 , self.Y_position - 2])
-            possible_move.append([self.X_position - 1 , self.Y_position + 2])
-            possible_move.append([self.X_position + 2 , self.Y_position - 1])
-            possible_move.append([self.X_position + 2 , self.Y_position + 1])
-            possible_move.append([self.X_position - 2 , self.Y_position + 1])
-            possible_move.append([self.X_position - 2 , self.Y_position - 1])
-
-        elif self.type == all_model[3]: #bishop moves :
+        if self.type == all_model[3] or self.type == all_model[4]: #bishop or queen moves 
             for x in range (1 , 8): 
                 possible_move.append([self.X_position - x  , self.Y_position - x])  
                 if self.Y_position - x < 0 or self.X_position - x < 0 or Board.board[self.Y_position - x][self.X_position - x] != 0:
@@ -88,19 +61,33 @@ class Move(Thread):
                 if self.Y_position + x > 7 or self.X_position + x > 7 or Board.board[self.Y_position + x][self.X_position + x] != 0:
                     break                  
 
-        elif self.type == all_model[4]: #queen moves :
-            for x in range (1 , 8): 
-                possible_move.append([self.X_position - x  , self.Y_position])
-                possible_move.append([self.X_position - x  , self.Y_position - x])
-            for x in range (1 , 8): 
-                possible_move.append([self.X_position      , self.Y_position + x])
-                possible_move.append([self.X_position - x  , self.Y_position + x])
-            for x in range (1 , 8): 
-                possible_move.append([self.X_position + x  , self.Y_position])
-                possible_move.append([self.X_position + x  , self.Y_position - x])
-            for x in range (1 , 8): 
-                possible_move.append([self.X_position      , self.Y_position - x])  
-                possible_move.append([self.X_position + x  , self.Y_position + x])   
+
+        if self.type == all_model[0]: #pawn moves :
+            if (self.Y_position == 0):  #exchange black pawn to queen at the end 
+                self.type = 'b_queen' 
+                Anime.type = 'b_queen'
+                Board.board[self.Y_position][self.X_position] = 'b_queen'  
+            if self.Y_position == 7 :  #exchange white pawn to queen at the end 
+                self.type = 'w_queen' 
+                Anime.type = 'w_queen'
+                Board.board[self.Y_position][self.X_position] = 'b_queen'  
+
+            if(self.Y_position == 6 and revers_move == -1 ): #check if pawn doesnt move yet 
+                possible_move.append([ self.X_position , self.Y_position + (2 * revers_move)]) 
+            if(self.Y_position == 1 and revers_move == 1 ): #check if pawn doesnt move yet 
+                possible_move.append([ self.X_position , self.Y_position + (2 * revers_move)]) 
+                                
+            possible_move.append([ self.X_position , self.Y_position + revers_move]) 
+                
+        elif self.type == all_model[2]: #knight moves :
+            possible_move.append([self.X_position + 1 , self.Y_position - 2])
+            possible_move.append([self.X_position + 1 , self.Y_position + 2])
+            possible_move.append([self.X_position - 1 , self.Y_position - 2])
+            possible_move.append([self.X_position - 1 , self.Y_position + 2])
+            possible_move.append([self.X_position + 2 , self.Y_position - 1])
+            possible_move.append([self.X_position + 2 , self.Y_position + 1])
+            possible_move.append([self.X_position - 2 , self.Y_position + 1])
+            possible_move.append([self.X_position - 2 , self.Y_position - 1])
 
         elif self.type == all_model[5]:  #king moves :
             possible_move.append([self.X_position + 1 , self.Y_position + 1])
