@@ -42,15 +42,23 @@ class Move(Thread):
                                 
             possible_move.append([ self.X_position , self.Y_position + revers_move]) 
                 
-        elif self.type == all_model[1]: #rook moves :
-            for x in range (0 , 8):         
-                possible_move.append([self.X_position - x  , self.Y_position])  
-            for x in range (0 , 8): 
-                possible_move.append([self.X_position      , self.Y_position + x]) 
-            for x in range (0 , 8): 
+        elif self.type == all_model[1]: #rook moves : 
+            for x in range (0 , self.X_position + 1):          #left 
+                possible_move.append([self.X_position - x  , self.Y_position]) 
+                if Board.board[self.Y_position][self.X_position - x] != 0:
+                    break
+            for x in range (0 , self.Y_position + 1):           #up
+                possible_move.append([self.X_position      , self.Y_position - x]) 
+                if Board.board[self.Y_position - x][self.X_position] != 0:
+                    break
+            for x in range (0 , 8 - self.X_position ):       #right
                 possible_move.append([self.X_position + x  , self.Y_position]) 
-            for x in range (0 , 8): 
-                possible_move.append([self.X_position      , self.Y_position - x])            
+                if Board.board[self.Y_position][self.X_position + x] != 0:
+                    break                
+            for x in range (0 , 8 - self.Y_position ):   #down
+                possible_move.append([self.X_position      , self.Y_position + x])            
+                if Board.board[self.Y_position + x][self.X_position] != 0:
+                    break                
 
         elif self.type == all_model[2]: #knight moves :
             possible_move.append([self.X_position + 1 , self.Y_position - 2])

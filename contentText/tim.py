@@ -11,7 +11,8 @@ class Tim(Thread):
         self.text = self.font.render(str(self.min)+':'+str(self.sec), True, BLACK)  
 
     def run(self): 
-        while True:
+        global game_exit
+        while game_exit:
             sleep(1)
             self.counter()
 
