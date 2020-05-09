@@ -21,8 +21,8 @@ class Board():
                     ['b_pawn','b_pawn','b_pawn','b_pawn','b_pawn','b_pawn','b_pawn','b_pawn'],
                     ['b_rook','b_knight','b_bishop','b_queen','b_king','b_bishop','b_knight','b_rook']
                     ]
-
-    def draw_board(self):  
+ 
+    def draw_board(self): 
         BRIGHT = Pieces()
         BRIGHT.set_background(self.template_path[self.selected_tempelate][0])
         DARK = Pieces()

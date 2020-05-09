@@ -43,15 +43,13 @@ class Move(Thread):
             possible_move.append([ self.X_position , self.Y_position + revers_move]) 
                 
         elif self.type == all_model[1]: #rook moves :
-            for x in range (1 , 8):         
-                possible_move.append([self.X_position - x  , self.Y_position]) 
-                if Board.board[self.X_position - x ][self.Y_position] != 0:
-                    break
-            for x in range (1 , 8): 
+            for x in range (0 , 8):         
+                possible_move.append([self.X_position - x  , self.Y_position])  
+            for x in range (0 , 8): 
                 possible_move.append([self.X_position      , self.Y_position + x]) 
-            for x in range (1 , 8): 
+            for x in range (0 , 8): 
                 possible_move.append([self.X_position + x  , self.Y_position]) 
-            for x in range (1 , 8): 
+            for x in range (0 , 8): 
                 possible_move.append([self.X_position      , self.Y_position - x])            
 
         elif self.type == all_model[2]: #knight moves :

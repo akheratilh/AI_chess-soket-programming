@@ -63,11 +63,12 @@ class Anime(Thread):
 
     def highlight(self , position): # highlight where the position is
         x , y = position
-        x = int(round(x/100))
-        y = int(round(y/100))
-        pygame.draw.rect(screen, GREEN, (100 * x, 100 * y, 100, 100), 5)
+        if y < 750:
+            x = int(round(x/100))
+            y = int(round(y/100))
+            pygame.draw.rect(screen, GREEN, (100 * x, 100 * y, 100, 100), 5)
         
     def highlight_possible_move(self , possible_move):
         for move in possible_move:
-            pygame.draw.rect(screen, BLUE, (100 * move[0], 100 * move[1], 100 , 100))
+            pygame.draw.rect(screen, YELLOW, (100 * move[0], 100 * move[1], 100 , 100) , 7)
             

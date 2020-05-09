@@ -2,23 +2,28 @@ from pieces import *
 from board import Board
 from anime import Anime 
 from algorithm.move import Move , Thread
+from contentText.tim import Tim
+
 
 class GUI():
     def __init__(self):    
         game_exit = False
         drag = False
         chess_board = Board()
-         
+
         chess_board.set_template('wood')
         m = Move()
         m.start()
+
+        t = Tim()
+        t.start()
 
         animation = Anime(chess_board)
         animation.start() 
         flag_move = 0 
 
         history = [] 
-        possible_move = []
+        possible_move = []        
 
         while not game_exit:  
             chess_board.draw_board()
@@ -53,7 +58,9 @@ class GUI():
 
             if drag:                                        # i check drag two time beacuse if i merge them then in the result the draged piece show under enemy solder
                 animation.drag(pygame.mouse.get_pos())              # in the other hand if i create piece first the highlight will stay on piece so player cant see piece
+            
+            
 
             pygame.display.flip()
-            clock.tick(60)     
+            clock.tick(40)     
         pygame.quit()
