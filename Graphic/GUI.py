@@ -45,7 +45,7 @@ class GUI():
                         pass
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     animation.set_type()
-                    if p2.can_move() and p2.team[0] == animation.type[0] :
+                    if animation.type and p2.can_move() and p2.team[0] == animation.type[0] :
                         animation.drag_init()  
                         m.set_value(str(animation.type) ,animation.position )
                         possible_move = m.possible_moves(chess_board , animation)
@@ -54,9 +54,10 @@ class GUI():
                 elif event.type == pygame.MOUSEBUTTONUP: 
                     animation.drag_done(possible_move )   #TO DO : check if is it possible to move 
                     possible_move = []
+                    if drag :
+                        p1.next_round()
+                        p2.next_round()
                     drag = False
-                    p1.next_round()
-                    p2.next_round()
             if drag:
                 animation.highlight_possible_move(possible_move)
                      
@@ -72,6 +73,9 @@ class GUI():
                 p1.move()
                 p1.next_round()
                 p2.next_round()
+            
+
+            #animation.king_check([3 , 0])  use this func as shown kings 
 
             pygame.display.flip()
             clock.tick(40)     

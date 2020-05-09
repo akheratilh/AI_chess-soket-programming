@@ -77,3 +77,6 @@ class Anime(Thread):
         for move in possible_move:
             pygame.draw.rect(screen, YELLOW, (100 * move[0], 100 * move[1], 100 , 100) , 7)
             
+    def king_check(self , position):
+        move = position
+        pygame.draw.rect(screen, RED, (100 * move[0], 100 * move[1], 100 , 100) , 7)
