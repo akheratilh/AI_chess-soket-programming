@@ -25,9 +25,10 @@ class GUI():
         history = [] 
         possible_move = []      
 
-        p1 = Player('white')
-        p2 = Player('black')
+        p1 = Player('white' , chess_board)
+        p2 = Player('black' , chess_board)
         p1.move()
+        
         p1.next_round()
         p2.next_round()
         while not game_exit:  
@@ -39,20 +40,25 @@ class GUI():
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_r:
                         chess_board.reset_board() 
+                        history = []
                     elif event.key == pygame.K_q:
                         game_exit = True
-                    elif event.key == pygame.K_z:
-                        pass
+                    elif event.key == pygame.K_z and len(history) > 0:
+                        pos = history.pop()         #TO DO : this part use to reverse move (undo move)
+
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     animation.set_type()
                     if animation.type and p2.can_move() and p2.team[0] == animation.type[0] :
                         animation.drag_init()  
+                        history.append(animation.position)
                         m.set_value(str(animation.type) ,animation.position )
                         possible_move = m.possible_moves(chess_board , animation)
                         animation.highlight_possible_move(possible_move)   
                         drag = True 
                 elif event.type == pygame.MOUSEBUTTONUP: 
-                    animation.drag_done(possible_move )   #TO DO : check if is it possible to move 
+                    move_done = animation.drag_done(possible_move )   # check if is it possible to move 
+                    if not move_done and len(history) > 0:
+                        history.pop()
                     possible_move = []
                     if drag :
                         p1.next_round()

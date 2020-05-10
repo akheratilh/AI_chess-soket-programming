@@ -1,9 +1,10 @@
 import random
 
 class Player():
-    def __init__(self , team):
+    def __init__(self , team ,chess_board):
         self.team = team
         self.round = self.start_first()
+        self.board = chess_board
 
     def move(self):
         pass
@@ -26,7 +27,8 @@ class Player():
     def move(self):
         if self.round:
             x = random.randint(0 , 7)
-            y = 1
-            print 'hihiihih'
+            y = 1 
+            return [y , x]
+
         
         

@@ -63,11 +63,11 @@ class Move(Thread):
 
         if self.type == all_model[0]: #pawn moves :
             if (self.Y_position == 0):  #exchange black pawn to queen at the end 
-                self.type = 'b_queen' 
+                self.name = 'b_queen' 
                 Anime.type = 'b_queen'
-                Board.board[self.Y_position][self.X_position] = 'b_queen'  
+                Board.board[self.Y_position][self.X_position] = 'b_queen' 
             if self.Y_position == 7 :  #exchange white pawn to queen at the end 
-                self.type = 'w_queen' 
+                self.name = 'w_queen' 
                 Anime.type = 'w_queen'
                 Board.board[self.Y_position][self.X_position] = 'w_queen'  
             
@@ -86,8 +86,8 @@ class Move(Thread):
                     possible_move.append([ self.X_position , self.Y_position + (2 * revers_move)]) 
                 if(self.Y_position == 1 and revers_move == 1 ): #check if pawn doesnt move yet 
                     possible_move.append([ self.X_position , self.Y_position + (2 * revers_move)]) 
-                possible_move.append([ self.X_position , self.Y_position + revers_move]) 
-                
+                possible_move.append([ self.X_position , self.Y_position + revers_move])    
+            
         elif self.type == all_model[2]: #knight moves :
             possible_move.append([self.X_position + 1 , self.Y_position - 2])
             possible_move.append([self.X_position + 1 , self.Y_position + 2])
