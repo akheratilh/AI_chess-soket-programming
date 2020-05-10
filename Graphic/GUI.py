@@ -11,7 +11,7 @@ class GUI():
         drag = False
         chess_board = Board()
 
-        chess_board.set_template('wood')
+        chess_board.set_template('normal')
         m = Move()
         m.start()
 
