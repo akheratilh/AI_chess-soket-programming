@@ -30,6 +30,7 @@ class Player(Move):
         if self.round:
             x = random.randint(0 , 7)
             y = 1 
+            print 'your turn! '
             return [y , x]
             
 

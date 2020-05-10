@@ -62,7 +62,7 @@ class GUI():
                         history.pop()
                     
                     possible_move = []
-                    if drag :
+                    if move_done :
                         p1.next_round()
                         p2.next_round()
                     drag = False
