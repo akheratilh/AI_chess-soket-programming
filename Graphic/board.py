@@ -1,18 +1,29 @@
 from pieces import *
 
-class Board():
-    def __init__(self):
-        self.board = None
+class Board(object):
+    board = [['w_rook','w_knight','w_bishop','w_king','w_queen','w_bishop','w_knight','w_rook'],
+                    ['w_pawn','w_pawn','w_pawn','w_pawn','w_pawn','w_pawn','w_pawn','w_pawn'],
+                    [0,0,0,0,0,0,0,0],
+                    [0,0,0,0,0,0,0,0],
+                    [0,0,0,0,0,0,0,0],
+                    [0,0,0,0,0,0,0,0],
+                    ['b_pawn','b_pawn','b_pawn','b_pawn','b_pawn','b_pawn','b_pawn','b_pawn'],
+                    ['b_rook','b_knight','b_bishop','b_queen','b_king','b_bishop','b_knight','b_rook']
+                ]    
+    def __init__(self): 
         self.reset_board()
         self.templates = {'wood' : 0 , 'normal' : 1}
         self.selected_tempelate = 0
         self.template_path = [['1' , '2'],['3' , '4']]
 
+    def test(self , i):
+        print i
+
     def set_template(self , selecte):
         self.selected_tempelate = self.templates[selecte]
         
     def reset_board(self):
-        self.board = [['w_rook','w_knight','w_bishop','w_king','w_queen','w_bishop','w_knight','w_rook'],
+        Board.board = [['w_rook','w_knight','w_bishop','w_king','w_queen','w_bishop','w_knight','w_rook'],
                     ['w_pawn','w_pawn','w_pawn','w_pawn','w_pawn','w_pawn','w_pawn','w_pawn'],
                     [0,0,0,0,0,0,0,0],
                     [0,0,0,0,0,0,0,0],
@@ -41,7 +52,7 @@ class Board():
         p = Pieces()
         for x in range(0 , 8):
             for y in range(0 , 8):
-                if not self.board[x][y] == 0:
-                    name = str(self.board[x][y])
+                if not Board.board[x][y] == 0:
+                    name = str(Board.board[x][y])
                     p.set_model(name)
                     p.draw_model([ y *100 , x * 100])

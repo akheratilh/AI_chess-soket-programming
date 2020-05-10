@@ -1,11 +1,12 @@
 import random
+from algorithm.algorith import algorithm
+from algorithm.move import Move
 
-class Player():
-    def __init__(self , team ,chess_board):
+class Player(Move):
+    def __init__(self , team):
         self.team = team
-        self.round = self.start_first()
-        self.board = chess_board
-
+        self.round = self.start_first() 
+        super(Move , self).test(457)
     def move(self):
         pass
 
@@ -18,6 +19,7 @@ class Player():
         else :
             self.round = True
      
+    
 
     def start_first(self):
         if self.team[0] == 'w':
@@ -29,6 +31,7 @@ class Player():
             x = random.randint(0 , 7)
             y = 1 
             return [y , x]
+            
 
         
         

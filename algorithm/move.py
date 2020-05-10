@@ -1,6 +1,7 @@
 from threading import Thread
+from Graphic.board import Board
 
-class Move(Thread):
+class Move(Thread , Board):
     def __init__(self): 
         Thread.__init__(self)
         self.X_position ,self.Y_position = None , None
@@ -17,7 +18,7 @@ class Move(Thread):
         self.is_white = self.isWhite()  
         self.type = self.name[2:]
  
-    def possible_moves(self , Board , Anime):
+    def possible_moves(self):
         all_model = ['pawn','rook','knight','bishop','queen','king']
         temp = []
         possible_move = []  # all moves which valid for pieces to do
@@ -63,12 +64,10 @@ class Move(Thread):
 
         if self.type == all_model[0]: #pawn moves :
             if (self.Y_position == 0):  #exchange black pawn to queen at the end 
-                self.name = 'b_queen' 
-                Anime.type = 'b_queen'
+                self.name = 'b_queen'  
                 Board.board[self.Y_position][self.X_position] = 'b_queen' 
             if self.Y_position == 7 :  #exchange white pawn to queen at the end 
-                self.name = 'w_queen' 
-                Anime.type = 'w_queen'
+                self.name = 'w_queen'  
                 Board.board[self.Y_position][self.X_position] = 'w_queen'  
             
             value = Board.board[self.Y_position + revers_move][self.X_position + 1]

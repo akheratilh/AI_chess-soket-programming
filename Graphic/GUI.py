@@ -25,8 +25,8 @@ class GUI():
         history = [] 
         possible_move = []      
 
-        p1 = Player('white' , chess_board)
-        p2 = Player('black' , chess_board)
+        p1 = Player('white')
+        p2 = Player('black')
         p1.move()
         
         p1.next_round()
@@ -52,13 +52,15 @@ class GUI():
                         animation.drag_init()  
                         history.append(animation.position)
                         m.set_value(str(animation.type) ,animation.position )
-                        possible_move = m.possible_moves(chess_board , animation)
+                        possible_move = m.possible_moves()
+                        animation.type = m.name
                         animation.highlight_possible_move(possible_move)   
                         drag = True 
                 elif event.type == pygame.MOUSEBUTTONUP: 
-                    move_done = animation.drag_done(possible_move )   # check if is it possible to move 
+                    move_done = animation.drag_done(possible_move)   # check if is it possible to move 
                     if not move_done and len(history) > 0:
                         history.pop()
+                    
                     possible_move = []
                     if drag :
                         p1.next_round()
