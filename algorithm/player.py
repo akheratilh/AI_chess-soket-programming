@@ -19,8 +19,6 @@ class Player(Move):
         else :
             self.round = True
      
-    
-
     def start_first(self):
         if self.team[0] == 'w':
             return True
@@ -31,6 +29,8 @@ class Player(Move):
             x = random.randint(0 , 7)
             y = 1 
             print 'your turn! '
+            al = algorithm()
+            al.random_move()
             return [y , x]
             
 

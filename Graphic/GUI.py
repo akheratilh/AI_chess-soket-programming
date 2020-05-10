@@ -2,6 +2,7 @@ from pieces import *
 from board import Board
 from anime import Anime 
 from algorithm.move import Move , Thread
+from algorithm.algorith import algorithm
 from contentText.tim import Tim 
 from algorithm.player import Player
 
@@ -31,6 +32,7 @@ class GUI():
         
         p1.next_round()
         p2.next_round()
+
         while not game_exit:  
             chess_board.draw_board()
             t.show()

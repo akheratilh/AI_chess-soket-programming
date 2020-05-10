@@ -12,9 +12,9 @@ class Move(Thread , Board):
     def run(self):
         pass
 
-    def set_value(self , type_name , position):
+    def set_value(self ,name , position):
         self.Y_position ,self.X_position = position
-        self.name = type_name
+        self.name = name
         self.is_white = self.isWhite()  
         self.type = self.name[2:]
  
@@ -69,16 +69,16 @@ class Move(Thread , Board):
             if self.Y_position == 7 :  #exchange white pawn to queen at the end 
                 self.name = 'w_queen'  
                 Board.board[self.Y_position][self.X_position] = 'w_queen'  
+            if (self.X_position + 1 < 8):
+                value = Board.board[self.Y_position + revers_move][self.X_position + 1]
             
-            value = Board.board[self.Y_position + revers_move][self.X_position + 1]
+                if (value != 0 and value[0] != self.name[0] ):
+                    possible_move.append([ self.X_position + 1 , self.Y_position + revers_move]) 
+            if self.X_position - 1 > 0:    
+                value = Board.board[self.Y_position + revers_move][self.X_position - 1]
             
-            if (value != 0 and value[0] != self.name[0] ):
-                possible_move.append([ self.X_position + 1 , self.Y_position + revers_move]) 
-            
-            value = Board.board[self.Y_position + revers_move][self.X_position - 1]
-            
-            if (value != 0 and value[0] != self.name[0] ):
-                possible_move.append([ self.X_position - 1 , self.Y_position + revers_move]) 
+                if (value != 0 and value[0] != self.name[0] ):
+                    possible_move.append([ self.X_position - 1 , self.Y_position + revers_move]) 
 
             if Board.board[self.Y_position + revers_move][self.X_position] == 0:
                 if(self.Y_position == 6 and revers_move == -1 ): #check if pawn doesnt move yet 
