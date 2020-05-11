@@ -81,7 +81,7 @@ class Move(Thread , Board):
                     possible_move.append([ self.X_position - 1 , self.Y_position + revers_move]) 
             
             if (self.Y_position + revers_move < 8 and self.Y_position + revers_move > 0):
-                if Board.board[self.Y_position + (revers_move * 2)][self.X_position] == 0:
+                if self.Y_position + (revers_move * 2) > 0 and self.Y_position + (revers_move * 2) < 8 and Board.board[self.Y_position + (revers_move * 2)][self.X_position] == 0:
                     if(self.Y_position == 6 and revers_move == -1 ): #check if pawn doesnt move yet 
                         possible_move.append([ self.X_position , self.Y_position + (2 * revers_move)]) 
                     if(self.Y_position == 1 and revers_move == 1 ): #check if pawn doesnt move yet 

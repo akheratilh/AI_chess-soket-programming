@@ -43,6 +43,7 @@ class GUI():
                     if event.key == pygame.K_r:
                         chess_board.reset_board() 
                         history = []
+                        algorithm.check = False
                     elif event.key == pygame.K_q:
                         game_exit = True
                     elif event.key == pygame.K_z and len(history) > 0:
@@ -74,12 +75,16 @@ class GUI():
                         p1.next_round()
                         p2.next_round()
                     drag = False
+
             if drag:
                 animation.highlight_possible_move(possible_move)
                      
             if not drag:
                 animation.highlight(pygame.mouse.get_pos())
             
+            if algorithm.check:
+                pygame.draw.rect(screen, RED, (100 * algorithm.king_X_pos, 100 * algorithm.king_Y_pos, 100, 100), 5)
+
             chess_board.draw_piece()
 
             if drag:                                        # i check drag two time beacuse if i merge them then in the result the draged piece show under enemy solder

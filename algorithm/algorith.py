@@ -5,6 +5,7 @@ from algorithm.tree import tree
 
 class algorithm(Board):
     check = False
+    king_X_pos ,king_Y_pos = 0 , 0
     def __init__(self):
         pass
 
@@ -21,8 +22,8 @@ class algorithm(Board):
                     for possible_move in m.possible_moves():
                         t.append(possible_move)
                         if super(algorithm , self).board[possible_move[1]][possible_move[0]] == 'b_king':
-                            algorithm.check = True
-                            print 'check'
+                            algorithm.check = True 
+                            algorithm.king_X_pos ,algorithm.king_Y_pos  = possible_move[0] ,possible_move[1]
                     possible_tree.append(t)
 
         return possible_tree
@@ -33,8 +34,7 @@ class algorithm(Board):
         child = possible_moves[x].get_children()
         
         while(len(child) == 0):
-            x = random.randint(0 , len(possible_moves) - 1)
-            print len(possible_moves)
+            x = random.randint(0 , len(possible_moves) - 1) 
             child = possible_moves[x].get_children()
         pos = child[0] 
         

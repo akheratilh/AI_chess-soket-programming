@@ -16,9 +16,6 @@ class Board(object):
         self.selected_tempelate = 0
         self.template_path = [['1' , '2'],['3' , '4']]
 
-    def test(self , i):
-        print i
-
     def set_template(self , selecte):
         self.selected_tempelate = self.templates[selecte]
         

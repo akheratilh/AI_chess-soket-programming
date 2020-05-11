@@ -5,8 +5,7 @@ from algorithm.move import Move
 class Player(Move):
     def __init__(self , team):
         self.team = team
-        self.round = self.start_first() 
-        super(Move , self).test(457)
+        self.round = self.start_first()  
     def move(self):
         pass
 
