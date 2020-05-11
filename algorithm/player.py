@@ -30,7 +30,7 @@ class Player(Move):
             y = 1 
             print 'your turn! '
             al = algorithm()
-            al.random_move()
+            al.move()
             return [y , x]
             
 
