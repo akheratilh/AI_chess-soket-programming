@@ -27,8 +27,7 @@ class Player(Move):
     def move(self):
         if self.round:
             x = random.randint(0 , 7)
-            y = 1 
-            print 'your turn! '
+            y = 1  
             al = algorithm()
             al.move()
             return [y , x]

@@ -1,23 +1,10 @@
 from Graphic.board import Board
 from algorithm.move import Move
 import random
-class tree():
-    def __init__(self , value , position):
-        self.children = []
-        self.value = value
-        self.X_position , self.Y_position = position
-    
-    def append(self , child):
-        self.children.append(child)
-    
-    def get_children(self):
-        return self.children
-
-    def get_position(self):
-        return [self.X_position , self.Y_position]
-
+from algorithm.tree import tree
 
 class algorithm(Board):
+    check = False
     def __init__(self):
         pass
 
@@ -33,6 +20,9 @@ class algorithm(Board):
                     t = tree(value , [x ,y])
                     for possible_move in m.possible_moves():
                         t.append(possible_move)
+                        if super(algorithm , self).board[possible_move[1]][possible_move[0]] == 'b_king':
+                            algorithm.check = True
+                            print 'check'
                     possible_tree.append(t)
 
         return possible_tree
@@ -46,17 +36,14 @@ class algorithm(Board):
             x = random.randint(0 , len(possible_moves) - 1)
             print len(possible_moves)
             child = possible_moves[x].get_children()
-        pos = child[0]
-        print possible_moves[x].value 
-        print pos
+        pos = child[0] 
         
         super(algorithm , self).board[pos[1]][pos[0]] = possible_moves[x].value 
-        x , y = possible_moves[x].get_position()
-        print x 
-        print y 
+        x , y = possible_moves[x].get_position() 
         super(algorithm , self).board[x][y] = 0 
 
     def move(self):
-        self.random_move()
+        self.random_move()  #i will add new func to move piece with AI
+
 
 

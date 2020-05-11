@@ -15,5 +15,7 @@ class Evaluation():
                 self.move.set_value(self.board[x][y] , [ x , y ] )
                 print self.move.is_white
 
+    def king_check(self):
+        pass
 
 # THIS CLASS DOES NOT COMPLITE YET

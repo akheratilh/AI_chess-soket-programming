@@ -49,12 +49,17 @@ class GUI():
                         pos = history.pop()         #TO DO : this part use to reverse move (undo move)
 
                 elif event.type == pygame.MOUSEBUTTONDOWN:
+                    possible_move = []
                     animation.set_type()
                     if animation.type and p2.can_move() and p2.team[0] == animation.type[0] :
                         animation.drag_init()  
                         history.append(animation.position)
                         m.set_value(str(animation.type) ,animation.position )
-                        possible_move = m.possible_moves()
+                        if not algorithm.check:
+                            possible_move = m.possible_moves()
+                        if animation.type == 'b_king':
+                            possible_move = m.possible_moves()
+
                         animation.type = m.name
                         animation.highlight_possible_move(possible_move)   
                         drag = True 
@@ -65,6 +70,7 @@ class GUI():
                     
                     possible_move = []
                     if move_done :
+                        algorithm.check = False
                         p1.next_round()
                         p2.next_round()
                     drag = False
