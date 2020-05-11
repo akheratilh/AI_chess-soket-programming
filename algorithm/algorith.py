@@ -41,11 +41,12 @@ class algorithm(Board):
 
     def move(self):
         possible_moves = self.random_move()
-        x = random.randint(0 , len(possible_moves))
+        x = random.randint(0 , len(possible_moves) -1 )
         child = possible_moves[x].get_children()
         
         while(len(child) == 0):
-            x = random.randint(0 , len(possible_moves))
+            x = random.randint(0 , len(possible_moves) - 1)
+            print len(possible_moves)
             child = possible_moves[x].get_children()
         pos = child[0]
         print possible_moves[x].value 
