@@ -81,12 +81,13 @@ class Move(Thread , Board):
                     possible_move.append([ self.X_position - 1 , self.Y_position + revers_move]) 
             
             if (self.Y_position + revers_move < 8 and self.Y_position + revers_move > 0):
-                if Board.board[self.Y_position + revers_move][self.X_position] == 0:
+                if Board.board[self.Y_position + (revers_move * 2)][self.X_position] == 0:
                     if(self.Y_position == 6 and revers_move == -1 ): #check if pawn doesnt move yet 
                         possible_move.append([ self.X_position , self.Y_position + (2 * revers_move)]) 
                     if(self.Y_position == 1 and revers_move == 1 ): #check if pawn doesnt move yet 
                         possible_move.append([ self.X_position , self.Y_position + (2 * revers_move)]) 
-                    possible_move.append([ self.X_position , self.Y_position + revers_move])    
+                if Board.board[self.Y_position + revers_move][self.X_position] == 0:
+                    possible_move.append([ self.X_position , self.Y_position + revers_move])   
             
         elif self.type == all_model[2]: #knight moves :
             possible_move.append([self.X_position + 1 , self.Y_position - 2])
@@ -108,7 +109,6 @@ class Move(Thread , Board):
             possible_move.append([self.X_position , self.Y_position - 1])
             possible_move.append([self.X_position , self.Y_position + 1]) 
          
-
         temp = []
         for possible in possible_move:
             if possible[0] < 8 and possible[0] >= 0 and possible[1] < 8 and possible[1] >= 0:

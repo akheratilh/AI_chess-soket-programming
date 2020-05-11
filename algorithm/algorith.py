@@ -21,7 +21,7 @@ class algorithm(Board):
     def __init__(self):
         pass
 
-    def random_move(self):
+    def get_possible_moves(self):
         m = Move()
         possible_tree = []
         for x in range(0 , 8):
@@ -37,10 +37,8 @@ class algorithm(Board):
 
         return possible_tree
         
-
-
-    def move(self):
-        possible_moves = self.random_move()
+    def random_move(self):
+        possible_moves = self.get_possible_moves()
         x = random.randint(0 , len(possible_moves) -1 )
         child = possible_moves[x].get_children()
         
@@ -57,5 +55,8 @@ class algorithm(Board):
         print x 
         print y 
         super(algorithm , self).board[x][y] = 0 
+
+    def move(self):
+        self.random_move()
 
 
