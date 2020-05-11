@@ -2,12 +2,14 @@ from Graphic.board import Board
 from algorithm.move import Move
 import random
 from algorithm.tree import tree
+from algorithm.evaluation import Evaluation
 
 class algorithm(Board):
     check = False
     king_X_pos ,king_Y_pos = 0 , 0
     def __init__(self):
-        pass
+        self.e = Evaluation()
+
 
     def get_possible_moves(self):
         m = Move()
@@ -15,6 +17,7 @@ class algorithm(Board):
         for x in range(0 , 8):
             for y in range(0 , 8):
                 value = super(algorithm , self).board[x][y] 
+                
                 if value != 0 and value[0] != 'b': 
                     m.set_value(value , [x ,y]) 
                     m.possible_moves()
@@ -43,7 +46,14 @@ class algorithm(Board):
         super(algorithm , self).board[x][y] = 0 
 
     def move(self):
+        self.e.set_score()
+        print '--------------'
+        eval = self.e.get_board()
+        for ev in eval:
+            print ev
         self.random_move()  #i will add new func to move piece with AI
 
+    def minimax(self , depth ,ismaxising):
+        pass
 
 

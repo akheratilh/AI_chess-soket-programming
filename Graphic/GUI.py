@@ -43,6 +43,9 @@ class GUI():
                     if event.key == pygame.K_r:
                         chess_board.reset_board() 
                         history = []
+                        t.reset()
+                        p1.next_round()
+                        p2.next_round() 
                         algorithm.check = False
                     elif event.key == pygame.K_q:
                         game_exit = True

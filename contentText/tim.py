@@ -30,3 +30,6 @@ class Tim(Thread):
                 self.min = 0
         self.text = self.font.render(str(self.min)+':'+str(self.sec), True, WHITE)  
         
+    def reset(self):
+        self.min = 0
+        self.sec = 0

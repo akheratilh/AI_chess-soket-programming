@@ -66,21 +66,22 @@ class Move(Thread , Board):
             if (self.Y_position == 0):  #exchange black pawn to queen at the end 
                 self.name = 'b_queen'  
                 Board.board[self.Y_position][self.X_position] = 'b_queen' 
+            
             if self.Y_position == 7 :  #exchange white pawn to queen at the end 
                 self.name = 'w_queen'  
                 Board.board[self.Y_position][self.X_position] = 'w_queen'  
-            if (self.X_position + 1 < 8 and self.Y_position + revers_move < 8 and self.Y_position + revers_move > 0):
+
+            if (self.X_position + 1 < 8 and self.Y_position + revers_move < 8 and self.Y_position + revers_move >= 0):
                 value = Board.board[self.Y_position + revers_move][self.X_position + 1]
-            
                 if (value != 0 and value[0] != self.name[0] ):
                     possible_move.append([ self.X_position + 1 , self.Y_position + revers_move]) 
-            if (self.X_position - 1 > 0 and self.Y_position + revers_move < 8 and self.Y_position + revers_move > 0):    
+
+            if (self.X_position - 1 > 0 and self.Y_position + revers_move < 8 and self.Y_position + revers_move >= 0):    
                 value = Board.board[self.Y_position + revers_move][self.X_position - 1]
-            
                 if (value != 0 and value[0] != self.name[0] ):
                     possible_move.append([ self.X_position - 1 , self.Y_position + revers_move]) 
             
-            if (self.Y_position + revers_move < 8 and self.Y_position + revers_move > 0):
+            if (self.Y_position + revers_move < 8 and self.Y_position + revers_move >= 0):
                 if self.Y_position + (revers_move * 2) > 0 and self.Y_position + (revers_move * 2) < 8 and Board.board[self.Y_position + (revers_move * 2)][self.X_position] == 0:
                     if(self.Y_position == 6 and revers_move == -1 ): #check if pawn doesnt move yet 
                         possible_move.append([ self.X_position , self.Y_position + (2 * revers_move)]) 
