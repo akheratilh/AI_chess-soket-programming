@@ -6,6 +6,7 @@ def main():
     print "# 1. pres R to reset game            #"
     print "# 2. pres Q to quit game             #"
     print "# 3. pres Z to undo last move        #"
+    print "# 4. pres M to mute/unmute           #"
     print "######################################"
     g = GUI()  
     

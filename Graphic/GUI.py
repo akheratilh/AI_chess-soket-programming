@@ -1,14 +1,16 @@
 from pieces import *
 from board import Board
-from anime import Anime 
+from anime import Anime
+from sound.sound import Sound
 from algorithm.move import Move , Thread
 from algorithm.algorith import algorithm
 from contentText.tim import Tim 
-from algorithm.player import Player
+from algorithm.player import Player 
 
 class GUI():
     def __init__(self):   
         global game_exit  
+        global mute
         drag = False
         chess_board = Board()
 
@@ -40,6 +42,11 @@ class GUI():
                 if event.type == pygame.QUIT:
                     game_exit = True
                 elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_m:
+                        if Sound.mute == False:
+                            Sound.mute = True
+                        else :
+                            Sound.mute = False
                     if event.key == pygame.K_r:
                         chess_board.reset_board() 
                         history = []
@@ -84,6 +91,7 @@ class GUI():
                      
             if not drag:
                 animation.highlight(pygame.mouse.get_pos())
+                
             
             if algorithm.check:
                 pygame.draw.rect(screen, RED, (100 * algorithm.king_X_pos, 100 * algorithm.king_Y_pos, 100, 100), 5)

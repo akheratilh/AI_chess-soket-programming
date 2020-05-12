@@ -2,7 +2,8 @@ from Graphic.board import Board
 from algorithm.move import Move
 import random
 from algorithm.tree import tree
-from algorithm.evaluation import Evaluation
+from algorithm.evaluation import Evaluation 
+import math
 
 class algorithm(Board):
     check = False
@@ -19,8 +20,7 @@ class algorithm(Board):
                 value = super(algorithm , self).board[x][y] 
                 
                 if value != 0 and value[0] != 'b': 
-                    m.set_value(value , [x ,y]) 
-                    m.possible_moves()
+                    m.set_value(value , [x ,y])  
                     t = tree(value , [x ,y])
                     for possible_move in m.possible_moves():
                         t.append(possible_move)
@@ -50,10 +50,41 @@ class algorithm(Board):
         print '--------------'
         eval = self.e.get_board()
         for ev in eval:
-            print ev
+            print ev 
         self.random_move()  #i will add new func to move piece with AI
+        #print self.minimax(1 ,self.get_possible_moves() , True) 
 
-    def minimax(self , depth ,ismaxising):
-        pass
+    def mov(self , value , position ,dest_position ):
+        x , y = position
+        dx , dy = dest_position
+        super(algorithm , self).board[dy][dx] = value
+        super(algorithm , self).board[y][x] = 0 
+        
+
+
+    def minimax(self , depth , node , ismaxing):
+        m = Move()
+        x , y = node    
+        value = super(algorithm , self).board[x][y]
+
+        if (depth == 0):
+            return evaluation.board[node[0]][node[1]]
+            
+        if (ismaxing):
+            bestmove = -99999
+            m.set_value(value , [x ,y])  
+            for posible_move in m.possible_moves():
+                bm = self.minimax(self , depth -1 , posible_move , False)
+                bestmove = math.max(bestmove , bm)
+            return bestmove
+
+        elif(not ismaxing):
+            bestmove = 99999
+            m.set_value(value , [x , y]) 
+            for posible_move in m.possible_moves():
+                bm = self.minimax(self , depth -1 , posible_move , True)
+                bestmove = math.min(bestmove , bm)
+            return bestmove
+
 
 

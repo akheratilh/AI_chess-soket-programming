@@ -1,7 +1,9 @@
 import pygame
-from threading import Thread
+from threading import Thread 
 
 class Sound(Thread):
+    mute = False
+
     def __init__(self, path):
         Thread.__init__(self)
         self.path = path
@@ -11,7 +13,8 @@ class Sound(Thread):
 
     def load(self):
         pygame.mixer.music.load(self.path)      
-    
-    def play(self):
-        pygame.mixer.music.play(1)          
+
+    def play(self): 
+        if not Sound.mute:
+            pygame.mixer.music.play(1)          
     
