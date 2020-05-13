@@ -18,6 +18,7 @@ class sock(Thread):
             self.s.send(data.encode())
         except:
             print 'something wrong'
+        print 'send'
 
     def receive(self):
         temp = Board.board
@@ -35,6 +36,7 @@ class sock(Thread):
             for y in range (0 , 8): 
                 temp[7-x][y] = d[x][y]  
         Board.board = temp
+        print 'receive'
 
     def close(self):
         self.s.close() 

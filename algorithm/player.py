@@ -40,9 +40,7 @@ class Player(Move):
             else:
                 so = sock()
                 so.start()
-                so.receive()
-                
-                print 'hey'
+                so.receive() 
 
         
         

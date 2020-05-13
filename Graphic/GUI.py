@@ -17,7 +17,7 @@ class GUI():
         drag = False
         chess_board = Board(sys.argv[1])
 
-        chess_board.set_template('normal')
+        chess_board.set_template('wood')
         m = Move()
         m.start()
 
@@ -93,7 +93,8 @@ class GUI():
                         p2.next_round()
                         so = sock()
                         so.start()
-                        so.send()                        
+                        so.send()   
+                        so.close()                     
                     drag = False
 
             if drag:
@@ -102,7 +103,6 @@ class GUI():
             if not drag:
                 animation.highlight(pygame.mouse.get_pos())
                 
-            
             if algorithm.check:
                 pygame.draw.rect(screen, RED, (100 * algorithm.king_X_pos, 100 * algorithm.king_Y_pos, 100, 100), 5)
 
