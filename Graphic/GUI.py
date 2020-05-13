@@ -14,9 +14,19 @@ class GUI():
     def __init__(self):   
         global game_exit  
         global mute
-
+        team1 = 'black'
+        team2 = 'white'
         drag = False
-        chess_board = Board(sys.argv[1])
+
+        print len(sys.argv)
+        isSockOn = 'AI'
+        if len(sys.argv) > 2 :
+            isSockOn = sys.argv[2] 
+        if len(sys.argv) > 1:
+            team2 = sys.argv[1]
+            if sys.argv[1] == 'black':
+                team1 = 'white'
+        chess_board = Board(team2)
 
         chess_board.set_template('wood')
         m = Move()
@@ -35,14 +45,13 @@ class GUI():
         chess_board.draw_board()
         
         chess_board.draw_piece()
-        te = 'black'
-        if sys.argv[1] == 'black':
-            te = 'white'
-        p1 = Player(te)
-        p2 = Player(sys.argv[1]) 
-        p1.set_type(sys.argv[2])
-        print sys.argv[1]
-        if (sys.argv[1] == 'black'):
+ 
+
+        p1 = Player(team1)
+        p2 = Player(team2) 
+        p1.set_type(isSockOn) 
+
+        if (team2 == 'black'):
             Move.player_team = 'w'
             p1.move()
         
@@ -62,7 +71,7 @@ class GUI():
                         else :
                             Sound.mute = False
                     if event.key == pygame.K_r:
-                        chess_board.reset_board(sys.argv[1]) 
+                        chess_board.reset_board(team1) 
                         history = []
                         t.reset()
                         p1.next_round()
@@ -98,7 +107,7 @@ class GUI():
                         algorithm.check = False
                         p1.next_round()
                         p2.next_round()
-                        if sys.argv[2] == "SOCKET":
+                        if isSockOn == "SOCKET":
                             so = sock() 
                             so.send()   
                             so.close()    
