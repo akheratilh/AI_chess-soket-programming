@@ -1,13 +1,19 @@
 import random
 from algorithm.algorith import algorithm
 from algorithm.move import Move
+from sock.sock import co
 
 class Player(Move):
-    def __init__(self , team):
+    def __init__(self , team ):
         self.team = team
-        self.round = self.start_first()  
+        self.round = self.start_first() 
+        self.type = 'AI'
+        self.type_list = ['AI' , 'SOCKET']  # AI mean play with computer and -- socket -- use to play with other player -- online --
     def move(self):
         pass
+
+    def set_type(self , type):
+        self.type = type
 
     def can_move(self):
         return self.round
@@ -25,12 +31,15 @@ class Player(Move):
     
     def move(self):
         if self.round:
-            x = random.randint(0 , 7)
-            y = 1  
-            al = algorithm()
-            al.move()
-            return [y , x]
-            
+            if (self.type == self.type_list[0]):
+                x = random.randint(0 , 7)
+                y = 1  
+                al = algorithm()
+                al.move()
+                return [y , x]
+            else:
+                sock = co()
+                sock.start()
 
         
         

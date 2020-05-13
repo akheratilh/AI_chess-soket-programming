@@ -11,6 +11,7 @@ class GUI():
     def __init__(self):   
         global game_exit  
         global mute
+
         drag = False
         chess_board = Board()
 
@@ -30,6 +31,7 @@ class GUI():
 
         p1 = Player('white')
         p2 = Player('black')
+        p1.set_type('SOCKET')
         p1.move()
         
         p1.next_round()
