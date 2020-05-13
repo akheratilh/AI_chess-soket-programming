@@ -29,8 +29,7 @@ class Player(Move):
             return True
         return False
     
-    def move(self):
-        if self.round:
+    def move(self): 
             if (self.type == self.type_list[0]):
                 x = random.randint(0 , 7)
                 y = 1  
@@ -41,6 +40,7 @@ class Player(Move):
                 so = sock()
                 so.start()
                 so.receive() 
+                so.close()
 
         
         

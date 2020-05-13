@@ -2,11 +2,12 @@
 import socket
 from threading import Thread
 from Graphic.board import Board
+from time import sleep
 import json
 
 class sock(Thread):
     def __init__(self):
-        Thread.__init__(self)
+        Thread.__init__(self) 
         self.host = '0.0.0.0'
         self.port = 50010
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -14,11 +15,12 @@ class sock(Thread):
     def send(self):
         try:
             self.s.connect((self.host, self.port)) 
-            data = json.dumps({"a": Board.board})
-            self.s.send(data.encode())
         except:
-            print 'something wrong'
-        print 'send'
+            print 'something wrong' 
+    
+        data = json.dumps({"a": Board.board})
+        self.s.sendall(data.encode()) 
+        print 'send' 
 
     def receive(self):
         temp = Board.board
@@ -35,22 +37,11 @@ class sock(Thread):
         for x in range (0 , 8):
             for y in range (0 , 8): 
                 temp[7-x][y] = d[x][y]  
-        Board.board = temp
+        Board.board = temp 
         print 'receive'
 
     def close(self):
         self.s.close() 
         
-    def run(self):
-        #while True:
-         #   s = sock()
-          #  i = input('select (1.recevie  2.send) :')
-           # if i == 1:
-            #    s.receive()
-            #elif i == 2:
-             #   s.send()
-            #else:
-             #   s.close()
-              #  break
-            #s.close()
+    def run(self): 
         pass
