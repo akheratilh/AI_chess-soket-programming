@@ -29,7 +29,7 @@ class Player(Move):
             return True
         return False
     
-    def move(self): 
+    def move(self):  
             if (self.type == self.type_list[0]):
                 x = random.randint(0 , 7)
                 y = 1  

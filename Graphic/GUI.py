@@ -120,8 +120,8 @@ class GUI():
                 animation.drag(pygame.mouse.get_pos())              # in the other hand if i create piece first the highlight will stay on piece so player cant see piece
                    
             if (p1.can_move()):
-                 
-                p1.move()
+                threading.Thread(target=p1.move).start()
+                #p1.move()
                 p1.next_round()
                 p2.next_round()       
 
