@@ -5,29 +5,31 @@ from Graphic.board import Board
 from time import sleep
 import json
 
-class sock(Thread):
-    def __init__(self):
-        Thread.__init__(self) 
-        self.host = '0.0.0.0'
+class sock():
+    def __init__(self): 
+        self.host = '127.0.0.1'
         self.port = 50010
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
+        self.s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     def send(self):
         try:
             self.s.connect((self.host, self.port)) 
-        except:
-            print 'something wrong' 
-    
-        data = json.dumps({"a": Board.board})
-        self.s.sendall(data.encode()) 
+        except Exception as e:
+            print 'something wrong' , e 
+
+        try:
+            data = json.dumps({"a": Board.board})
+            self.s.sendall(data.encode()) 
+        except Exception as e:
+            print 'something wrong json ' , e 
         print 'send' 
 
     def receive(self):
         temp = Board.board
         try:
             self.s.bind((self.host, self.port))
-        except:
-            print 'something wrong'
+        except Exception as e:
+            print 'something wrong' , e 
         print 'wating for connection'
         self.s.listen(1)
         conn , addr = self.s.accept()
@@ -36,12 +38,11 @@ class sock(Thread):
         d = data.get("a")
         for x in range (0 , 8):
             for y in range (0 , 8): 
-                temp[7-x][y] = d[x][y]  
+                temp[7-x][y] = d[x][y]
+        
         Board.board = temp 
         print 'receive'
 
     def close(self):
         self.s.close() 
-        
-    def run(self): 
-        pass
+         

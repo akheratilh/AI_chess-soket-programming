@@ -37,8 +37,7 @@ class Player(Move):
                 al.move()
                 return [y , x]
             else:
-                so = sock()
-                so.start()
+                so = sock() 
                 so.receive() 
                 so.close()
 

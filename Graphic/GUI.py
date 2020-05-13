@@ -97,8 +97,7 @@ class GUI():
                         p1.next_round()
                         p2.next_round()
                         if sys.argv[3] == "SOCKET":
-                            so = sock()
-                            so.start()
+                            so = sock() 
                             so.send()   
                             so.close()    
 
