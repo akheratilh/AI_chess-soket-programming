@@ -35,10 +35,12 @@ class GUI():
         chess_board.draw_board()
         
         chess_board.draw_piece()
-
-        p1 = Player(sys.argv[2])
+        te = 'black'
+        if sys.argv[1] == 'black':
+            te = 'white'
+        p1 = Player(te)
         p2 = Player(sys.argv[1]) 
-        p1.set_type(sys.argv[3])
+        p1.set_type(sys.argv[2])
         print sys.argv[1]
         if (sys.argv[1] == 'black'):
             Move.player_team = 'w'
@@ -60,7 +62,7 @@ class GUI():
                         else :
                             Sound.mute = False
                     if event.key == pygame.K_r:
-                        chess_board.reset_board(sys.argv[0]) 
+                        chess_board.reset_board(sys.argv[1]) 
                         history = []
                         t.reset()
                         p1.next_round()
@@ -96,7 +98,7 @@ class GUI():
                         algorithm.check = False
                         p1.next_round()
                         p2.next_round()
-                        if sys.argv[3] == "SOCKET":
+                        if sys.argv[2] == "SOCKET":
                             so = sock() 
                             so.send()   
                             so.close()    
