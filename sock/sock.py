@@ -1,22 +1,25 @@
 # Echo server program
 import socket
 from threading import Thread
+from Graphic.board import Board
+import json
 
-class sock():
+class sock(Board):
     def __init__(self):
         self.host = '0.0.0.0'
         self.port = 50010
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
- 
-    def send(self , msg):
+
+    def send(self):
         try:
             self.s.connect((self.host, self.port)) 
-            self.s.send(msg)
+            data = json.dumps({"a": Board.board})
+            self.s.send(data.encode())
         except:
             print 'something wrong'
-        
-    
+
     def receive(self):
+        temp = self.board
         try:
             self.s.bind((self.host, self.port))
         except:
@@ -24,9 +27,13 @@ class sock():
         print 'wating for connection'
         self.s.listen(1)
         conn , addr = self.s.accept()
-        d = conn.recv(1024) 
-        print addr , d
-        
+        data = conn.recv(1024)
+        data = json.loads(data.decode())
+        d = data.get("a")
+        for x in range (0 , 8):
+            for y in range (0 , 8): 
+                temp[7-x][y] = d[x][y]  
+        Board.board = temp
 
     def close(self):
         self.s.close()
@@ -42,8 +49,7 @@ class co(Thread):
             if i == 1:
                 s.receive()
             elif i == 2:
-                msg = raw_input('enter message: ')
-                s.send(msg)
+                s.send()
             else:
                 s.close()
                 break

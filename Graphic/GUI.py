@@ -106,8 +106,7 @@ class GUI():
             if (p1.can_move()):
                 p1.move()
                 p1.next_round()
-                p2.next_round()
-            
+                p2.next_round()       
 
             #animation.king_check([3 , 0])  use this func as shown kings 
 
