@@ -1,7 +1,7 @@
 import random
 from algorithm.algorith import algorithm
 from algorithm.move import Move
-from sock.sock import co
+from sock.sock import sock
 
 class Player(Move):
     def __init__(self , team ):
@@ -38,8 +38,11 @@ class Player(Move):
                 al.move()
                 return [y , x]
             else:
-                sock = co()
-                sock.start()
+                so = sock()
+                so.start()
+                so.receive()
+                
+                print 'hey'
 
         
         

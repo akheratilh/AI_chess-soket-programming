@@ -6,6 +6,8 @@ from algorithm.move import Move , Thread
 from algorithm.algorith import algorithm
 from contentText.tim import Tim 
 from algorithm.player import Player 
+import sys
+from sock.sock import sock
 
 class GUI():
     def __init__(self):   
@@ -13,7 +15,7 @@ class GUI():
         global mute
 
         drag = False
-        chess_board = Board()
+        chess_board = Board(sys.argv[1])
 
         chess_board.set_template('normal')
         m = Move()
@@ -29,13 +31,16 @@ class GUI():
         history = [] 
         possible_move = []      
 
-        p1 = Player('white')
-        p2 = Player('black')
-        p1.set_type('SOCKET')
-        p1.move()
+        p1 = Player(sys.argv[2])
+        p2 = Player(sys.argv[1])
+        p1.set_type(sys.argv[3])
+        print sys.argv[1]
+        if (sys.argv[1] == 'black'):
+            Move.player_team = 'w'
+            p1.move()
         
-        p1.next_round()
-        p2.next_round()
+            p1.next_round()
+            p2.next_round()
 
         while not game_exit:  
             chess_board.draw_board()
@@ -50,7 +55,7 @@ class GUI():
                         else :
                             Sound.mute = False
                     if event.key == pygame.K_r:
-                        chess_board.reset_board() 
+                        chess_board.reset_board(sys.argv[0]) 
                         history = []
                         t.reset()
                         p1.next_round()
@@ -86,6 +91,9 @@ class GUI():
                         algorithm.check = False
                         p1.next_round()
                         p2.next_round()
+                        so = sock()
+                        so.start()
+                        so.send()                        
                     drag = False
 
             if drag:

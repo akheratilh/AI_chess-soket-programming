@@ -4,8 +4,9 @@ from threading import Thread
 from Graphic.board import Board
 import json
 
-class sock(Board):
+class sock(Thread):
     def __init__(self):
+        Thread.__init__(self)
         self.host = '0.0.0.0'
         self.port = 50010
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -19,7 +20,7 @@ class sock(Board):
             print 'something wrong'
 
     def receive(self):
-        temp = self.board
+        temp = Board.board
         try:
             self.s.bind((self.host, self.port))
         except:
@@ -36,22 +37,18 @@ class sock(Board):
         Board.board = temp
 
     def close(self):
-        self.s.close()
-
-class co(Thread):
-    def __init__(self):
-        Thread.__init__(self) 
+        self.s.close() 
         
     def run(self):
-        while True:
-            s = sock()
-            i = input('select (1.recevie  2.send) :')
-            if i == 1:
-                s.receive()
-            elif i == 2:
-                s.send()
-            else:
-                s.close()
-                break
-            s.close()
-
+        #while True:
+         #   s = sock()
+          #  i = input('select (1.recevie  2.send) :')
+           # if i == 1:
+            #    s.receive()
+            #elif i == 2:
+             #   s.send()
+            #else:
+             #   s.close()
+              #  break
+            #s.close()
+        pass

@@ -2,6 +2,7 @@ from threading import Thread
 from Graphic.board import Board
 
 class Move(Thread , Board):
+    player_team = 'b'
     def __init__(self): 
         Thread.__init__(self)
         self.X_position ,self.Y_position = None , None
@@ -64,12 +65,12 @@ class Move(Thread , Board):
 
         if self.type == all_model[0]: #pawn moves :
             if (self.Y_position == 0):  #exchange black pawn to queen at the end 
-                self.name = 'b_queen'  
-                Board.board[self.Y_position][self.X_position] = 'b_queen' 
+                self.name = self.name[0] + '_queen'  
+                Board.board[self.Y_position][self.X_position] = self.name[0] +'_queen' 
             
             if self.Y_position == 7 :  #exchange white pawn to queen at the end 
-                self.name = 'w_queen'  
-                Board.board[self.Y_position][self.X_position] = 'w_queen'  
+                self.name = self.name[0] +'_queen'  
+                Board.board[self.Y_position][self.X_position] = self.name[0] +'_queen'  
 
             if (self.X_position + 1 < 8 and self.Y_position + revers_move < 8 and self.Y_position + revers_move >= 0):
                 value = Board.board[self.Y_position + revers_move][self.X_position + 1]
@@ -122,7 +123,7 @@ class Move(Thread , Board):
         return possible_move
 
     def isWhite(self):
-        if self.name[0] == 'w': 
+        if self.name[0] == Move.player_team: 
             return True 
         return False
 

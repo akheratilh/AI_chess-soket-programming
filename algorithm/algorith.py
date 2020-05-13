@@ -19,7 +19,7 @@ class algorithm(Board):
             for y in range(0 , 8):
                 value = super(algorithm , self).board[x][y] 
                 
-                if value != 0 and value[0] != 'b': 
+                if value != 0 and value[0] == Move.player_team: 
                     m.set_value(value , [x ,y])  
                     t = tree(value , [x ,y])
                     for possible_move in m.possible_moves():

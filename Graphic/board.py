@@ -1,26 +1,20 @@
 from pieces import *
 
 class Board(object):
-    board = [['w_rook','w_knight','w_bishop','w_king','w_queen','w_bishop','w_knight','w_rook'],
-                    ['w_pawn','w_pawn','w_pawn','w_pawn','w_pawn','w_pawn','w_pawn','w_pawn'],
-                    [0,0,0,0,0,0,0,0],
-                    [0,0,0,0,0,0,0,0],
-                    [0,0,0,0,0,0,0,0],
-                    [0,0,0,0,0,0,0,0],
-                    ['b_pawn','b_pawn','b_pawn','b_pawn','b_pawn','b_pawn','b_pawn','b_pawn'],
-                    ['b_rook','b_knight','b_bishop','b_queen','b_king','b_bishop','b_knight','b_rook']
-                ]    
-    def __init__(self): 
-        self.reset_board()
+    board = []    
+    def __init__(self , team): 
+        self.reset_board(team)
         self.templates = {'wood' : 0 , 'normal' : 1}
         self.selected_tempelate = 0
         self.template_path = [['1' , '2'],['3' , '4']]
+        
 
     def set_template(self , selecte):
         self.selected_tempelate = self.templates[selecte]
         
-    def reset_board(self):
-        Board.board = [['w_rook','w_knight','w_bishop','w_king','w_queen','w_bishop','w_knight','w_rook'],
+    def reset_board(self , team):
+        if team == 'black':
+            Board.board = [['w_rook','w_knight','w_bishop','w_king','w_queen','w_bishop','w_knight','w_rook'],
                     ['w_pawn','w_pawn','w_pawn','w_pawn','w_pawn','w_pawn','w_pawn','w_pawn'],
                     [0,0,0,0,0,0,0,0],
                     [0,0,0,0,0,0,0,0],
@@ -28,7 +22,17 @@ class Board(object):
                     [0,0,0,0,0,0,0,0],
                     ['b_pawn','b_pawn','b_pawn','b_pawn','b_pawn','b_pawn','b_pawn','b_pawn'],
                     ['b_rook','b_knight','b_bishop','b_queen','b_king','b_bishop','b_knight','b_rook']
-                    ]
+                ]
+        else :
+            Board.board = [['b_rook','b_knight','b_bishop','b_queen','b_king','b_bishop','b_knight','b_rook'],
+                    ['b_pawn','b_pawn','b_pawn','b_pawn','b_pawn','b_pawn','b_pawn','b_pawn'],
+                    [0,0,0,0,0,0,0,0],
+                    [0,0,0,0,0,0,0,0],
+                    [0,0,0,0,0,0,0,0],
+                    [0,0,0,0,0,0,0,0],
+                    ['w_pawn','w_pawn','w_pawn','w_pawn','w_pawn','w_pawn','w_pawn','w_pawn'],
+                    ['w_rook','w_knight','w_bishop','w_king','w_queen','w_bishop','w_knight','w_rook']
+                ]    
  
     def draw_board(self): 
         BRIGHT = Pieces()
