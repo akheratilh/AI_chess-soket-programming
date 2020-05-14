@@ -48,7 +48,7 @@ class algorithm(Board):
         self.mov(possible_moves[x].value  , possible_moves[x].get_position() ,pos)
     
     def AI(self):
-        self.minimax( 3 , True)  
+        self.minimax( 2 , True)  
         
         self.mov(self.bestmove_val , self.bestmove_pos ,self.bestmove_des) 
 
@@ -84,15 +84,12 @@ class algorithm(Board):
          
         elif(ismaxing):
             possible_moves = self.get_possible_moves()  
-            for pieces in possible_moves:
-                print pieces.value
+            for pieces in possible_moves: 
                 for possible_move in pieces.get_children():
                     self.mov(pieces.value ,pieces.get_position() , possible_move )                  
                     bm = self.minimax(depth -1 , False ) 
-                    print maxmove
                     if maxmove > bm:
-                        maxmove = bm
-                        print maxmove
+                        maxmove = bm 
                         self.bestmove_val = pieces.value
                         self.bestmove_pos = pieces.get_position()
                         self.bestmove_des = possible_move
@@ -111,8 +108,7 @@ class algorithm(Board):
                 possible_moves = self.get_possible_moves()  
                 Move.player_team = 'w'
 
-            for pieces in possible_moves:
-                print pieces.value
+            for pieces in possible_moves: 
                 for possible_move in pieces.get_children():
                     self.mov(pieces.value ,pieces.get_position() , possible_move )  
                     bm = self.minimax( depth -1 , True )
@@ -125,13 +121,9 @@ class algorithm(Board):
             for x in range (0 , 8):
                 for y in range (0 , 8):
                     Board.board[x][y] = temp_board[x][y]
-
-        print self.bestmove_val , self.bestmove_pos ,self.bestmove_des
         
-        if ismaxing:
-            print maxmove
+        if ismaxing: 
             return maxmove 
-        else :
-            print minmove
+        else : 
             return minmove
 
