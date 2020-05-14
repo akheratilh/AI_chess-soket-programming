@@ -48,7 +48,7 @@ class algorithm(Board):
         self.mov(possible_moves[x].value  , possible_moves[x].get_position() ,pos)
     
     def AI(self):
-        self.minimax( 2 , True) 
+        self.minimax( 3 , True)  
         self.mov(self.bestmove_val , self.bestmove_pos ,self.bestmove_des) 
 
     def move(self): 
@@ -80,12 +80,14 @@ class algorithm(Board):
             return e.get_score()
 
         for pieces in possible_moves: 
+            print pieces.value  
             if (ismaxing):
                 bestmove = -99999 
                 for possible_move in pieces.get_children():
-                    self.mov(pieces.value ,pieces.get_position() , possible_move )                    
+                    self.mov(pieces.value ,pieces.get_position() , possible_move )                  
                     bm = self.minimax(depth -1 , False ) 
-                    if bestmove < bm:
+                    
+                    if bestmove <= bm:
                         bestmove = bm
                         self.bestmove_val = pieces.value
                         self.bestmove_pos = pieces.get_position()
@@ -95,12 +97,12 @@ class algorithm(Board):
                             Board.board[x][y] = temp_board[x][y]                
                     
             elif(not ismaxing):
-                bestmove = 99999 
+                bestmove = -99999 
                 for possible_move in pieces.get_children():
                     self.mov(pieces.value ,pieces.get_position() , possible_move )  
                     bm = self.minimax( depth -1 , True )
-                    if bestmove < bm:
-                        bestmove = bm
+                    if bestmove <= bm:
+                        bestmove = bm 
                         self.bestmove_val = pieces.value
                         self.bestmove_pos = pieces.get_position()
                         self.bestmove_des = possible_move                 
@@ -111,6 +113,6 @@ class algorithm(Board):
             for x in range (0 , 8):
                 for y in range (0 , 8):
                     Board.board[x][y] = temp_board[x][y]
-
+        print bestmove
         return bestmove
 

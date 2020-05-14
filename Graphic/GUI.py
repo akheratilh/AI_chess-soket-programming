@@ -52,7 +52,7 @@ class GUI():
 
         if (team2 == 'black'):
             Move.player_team = 'w'
-            p1.move()
+            threading.Thread(target=p1.move).start()
         
             p1.next_round()
             p2.next_round()
@@ -83,7 +83,7 @@ class GUI():
 
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     possible_move = []
-                    animation.set_type()
+                    animation.set_type() 
                     if animation.type and p2.can_move() and p2.team[0] == animation.type[0] :
                         animation.drag_init()  
                         history.append(animation.position)
@@ -104,12 +104,12 @@ class GUI():
                     possible_move = []
                     if move_done :
                         algorithm.check = False
-                        p1.next_round()
-                        p2.next_round()
                         if isSockOn == "SOCKET":
                             so = sock() 
                             so.send()   
                             so.close()    
+                        p1.next_round()
+                        p2.next_round()
 
                     drag = False
 
