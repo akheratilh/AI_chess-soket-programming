@@ -8,7 +8,8 @@ you can change background by changing chess_board.set_template('wood') argument 
 ### you have two choice : 
 1. play with AI <br />
 just type **python AI_chess [ black | white | '' ]**<br />
-2.play with real person using socket<br />
+
+2. play with real person using socket<br />
 just type **python AI_chess [black | white | '' ] SOCKET**<br />
 
 ## wood
