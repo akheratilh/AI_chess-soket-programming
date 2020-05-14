@@ -28,7 +28,7 @@ class algorithm(Board):
                     for possible_move in m.possible_moves():
                         t.append(possible_move)
                         if super(algorithm , self).board[possible_move[1]][possible_move[0]] ==  'b_king':
-                            algorithm.check = True 
+                            #algorithm.check = True 
                             algorithm.king_X_pos ,algorithm.king_Y_pos  = possible_move[0] ,possible_move[1]
                     if (len(t.get_children()) > 0): 
                         possible_tree.append(t)
@@ -48,22 +48,11 @@ class algorithm(Board):
         self.mov(possible_moves[x].value  , possible_moves[x].get_position() ,pos)
     
     def AI(self):
-        self.minimax( 1 , True , 0)
-        print self.bestmove_val , self.bestmove_pos ,self.bestmove_des
-        self.mov(self.bestmove_val , self.bestmove_pos ,self.bestmove_des)
-        #for a in self.get_possible_moves():
-        #    print a.value
-        #    print a.get_children()
+        self.minimax( 2 , True) 
+        self.mov(self.bestmove_val , self.bestmove_pos ,self.bestmove_des) 
 
-    def move(self):
-        self.e.set_score()
-        print '--------------'
-        eval = self.e.get_board()
-        #for ev in eval:
-         #   print ev 
-        #self.random_move()  #i will add new func to move piece with AI
-        self.AI()
-        #print self.minimax(1 ,self.get_possible_moves() , True) 
+    def move(self): 
+        self.AI() 
 
     def mov(self , value , position ,dest_position ):
         x , y = position
@@ -71,9 +60,7 @@ class algorithm(Board):
         Board.board[dy][dx] = value
         Board.board[x][y] = 0 
         
-
-
-    def minimax(self , depth , ismaxing , i):
+    def minimax(self , depth , ismaxing ):
         possible_moves = self.get_possible_moves()      
         temp_board = []
 
@@ -84,23 +71,20 @@ class algorithm(Board):
 
         for x in range (0 , 8):
             for y in range (0 , 8):
-                temp_board[x][y] = Board.board[x][y]
-        for tem in temp_board:
-            print tem 
-        print 'i : ' , i
+                temp_board[x][y] = Board.board[x][y] 
+
         if (depth == 0):
             e = Evaluation() 
-            print 'score : ' ,e.get_score()
+            e.set_score()
+            print e.get_score()
             return e.get_score()
-        for pieces in possible_moves:
 
-            print pieces.value
+        for pieces in possible_moves: 
             if (ismaxing):
                 bestmove = -99999 
                 for possible_move in pieces.get_children():
-                    print possible_move , 'end'
                     self.mov(pieces.value ,pieces.get_position() , possible_move )                    
-                    bm = self.minimax(depth -1 , False ,i+10) 
+                    bm = self.minimax(depth -1 , False ) 
                     if bestmove < bm:
                         bestmove = bm
                         self.bestmove_val = pieces.value
@@ -114,14 +98,15 @@ class algorithm(Board):
                 bestmove = 99999 
                 for possible_move in pieces.get_children():
                     self.mov(pieces.value ,pieces.get_position() , possible_move )  
-                    bm = self.minimax( depth -1 , True ,i+5)
-                    if bestmove > bm:
-                        bestmove = bm                    
+                    bm = self.minimax( depth -1 , True )
+                    if bestmove < bm:
+                        bestmove = bm
+                        self.bestmove_val = pieces.value
+                        self.bestmove_pos = pieces.get_position()
+                        self.bestmove_des = possible_move                 
                     for x in range (0 , 8):
                         for y in range (0 , 8):
-                            Board.board[x][y] = temp_board[x][y] 
-                
-            print '----------------end pieces ---------------------'
+                            Board.board[x][y] = temp_board[x][y]  
         
             for x in range (0 , 8):
                 for y in range (0 , 8):

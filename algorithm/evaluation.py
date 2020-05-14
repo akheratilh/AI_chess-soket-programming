@@ -43,7 +43,7 @@ class Evaluation(Board):
                     elif(pieces[2:] == 'queen'):
                         value = 100
                     elif(pieces[2:] == 'king'):
-                        value = 1000    
+                        value = 10000    
                                                         
                     if pieces[0] == 'w':
                         value *= -1
@@ -52,8 +52,8 @@ class Evaluation(Board):
     def get_score(self):
         value = 0
         for x in range(0,8):
-            for y in range (0 , 8):
-                value += self.temp[x][y]
+            for y in range (0 , 8): 
+                value += self.temp[x][y] 
         return value
 
 

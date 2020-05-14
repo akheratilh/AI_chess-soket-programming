@@ -17,8 +17,7 @@ class GUI():
         team1 = 'black'
         team2 = 'white'
         drag = False
-
-        print len(sys.argv)
+ 
         isSockOn = 'AI'
         if len(sys.argv) > 2 :
             isSockOn = sys.argv[2] 
