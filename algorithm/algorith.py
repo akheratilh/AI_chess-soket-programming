@@ -49,10 +49,12 @@ class algorithm(Board):
     
     def AI(self):
         self.minimax( 3 , True)  
+        
         self.mov(self.bestmove_val , self.bestmove_pos ,self.bestmove_des) 
 
     def move(self): 
         self.AI() 
+        #self.random_move()
 
     def mov(self , value , position ,dest_position ):
         x , y = position
@@ -61,7 +63,7 @@ class algorithm(Board):
         Board.board[x][y] = 0 
         
     def minimax(self , depth , ismaxing ):
-        possible_moves = self.get_possible_moves()      
+            
         temp_board = []
 
         for x in range (0 , 8):
@@ -72,23 +74,25 @@ class algorithm(Board):
         for x in range (0 , 8):
             for y in range (0 , 8):
                 temp_board[x][y] = Board.board[x][y] 
+        maxmove = 99999 
+        minmove = -99999
 
         if (depth == 0):
             e = Evaluation() 
-            e.set_score()
-            print e.get_score()
+            e.set_score() 
             return e.get_score()
-
-        for pieces in possible_moves: 
-            print pieces.value  
-            if (ismaxing):
-                bestmove = -99999 
+         
+        elif(ismaxing):
+            possible_moves = self.get_possible_moves()  
+            for pieces in possible_moves:
+                print pieces.value
                 for possible_move in pieces.get_children():
                     self.mov(pieces.value ,pieces.get_position() , possible_move )                  
                     bm = self.minimax(depth -1 , False ) 
-                    
-                    if bestmove <= bm:
-                        bestmove = bm
+                    print maxmove
+                    if maxmove > bm:
+                        maxmove = bm
+                        print maxmove
                         self.bestmove_val = pieces.value
                         self.bestmove_pos = pieces.get_position()
                         self.bestmove_des = possible_move
@@ -96,16 +100,24 @@ class algorithm(Board):
                         for y in range (0 , 8):
                             Board.board[x][y] = temp_board[x][y]                
                     
-            elif(not ismaxing):
-                bestmove = -99999 
+        elif(not ismaxing):
+            if Move.player_team ==  'b':
+                Move.player_team = 'w'
+                possible_moves = self.get_possible_moves()  
+                Move.player_team = 'b'
+
+            elif Move.player_team ==  'w':
+                Move.player_team = 'b'
+                possible_moves = self.get_possible_moves()  
+                Move.player_team = 'w'
+
+            for pieces in possible_moves:
+                print pieces.value
                 for possible_move in pieces.get_children():
                     self.mov(pieces.value ,pieces.get_position() , possible_move )  
                     bm = self.minimax( depth -1 , True )
-                    if bestmove <= bm:
-                        bestmove = bm 
-                        self.bestmove_val = pieces.value
-                        self.bestmove_pos = pieces.get_position()
-                        self.bestmove_des = possible_move                 
+                    if minmove < bm:
+                        minmove = bm                
                     for x in range (0 , 8):
                         for y in range (0 , 8):
                             Board.board[x][y] = temp_board[x][y]  
@@ -113,6 +125,13 @@ class algorithm(Board):
             for x in range (0 , 8):
                 for y in range (0 , 8):
                     Board.board[x][y] = temp_board[x][y]
-        print bestmove
-        return bestmove
+
+        print self.bestmove_val , self.bestmove_pos ,self.bestmove_des
+        
+        if ismaxing:
+            print maxmove
+            return maxmove 
+        else :
+            print minmove
+            return minmove
 
