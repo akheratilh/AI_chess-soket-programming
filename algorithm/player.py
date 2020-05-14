@@ -9,8 +9,6 @@ class Player(Move):
         self.round = self.start_first() 
         self.type = 'AI'
         self.type_list = ['AI' , 'SOCKET']  # AI mean play with computer and -- socket -- use to play with other player -- online --
-    def move(self):
-        pass
 
     def set_type(self , type):
         self.type = type
@@ -29,13 +27,10 @@ class Player(Move):
             return True
         return False
     
-    def move(self):  
-            if (self.type == self.type_list[0]):
-                x = random.randint(0 , 7)
-                y = 1  
+    def move(self):   
+            if (self.type == self.type_list[0]): 
                 al = algorithm()
-                al.move()
-                return [y , x]
+                al.move() 
             else:
                 so = sock() 
                 so.receive() 

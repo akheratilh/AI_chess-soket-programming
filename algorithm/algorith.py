@@ -27,9 +27,9 @@ class algorithm(Board):
                     t = tree(value , [x ,y])
                     for possible_move in m.possible_moves():
                         t.append(possible_move)
-                        if super(algorithm , self).board[possible_move[1]][possible_move[0]] ==  'b_king':
+                        #if super(algorithm , self).board[possible_move[1]][possible_move[0]] ==  'b_king':
                             #algorithm.check = True 
-                            algorithm.king_X_pos ,algorithm.king_Y_pos  = possible_move[0] ,possible_move[1]
+                            #algorithm.king_X_pos ,algorithm.king_Y_pos  = possible_move[0] ,possible_move[1]
                     if (len(t.get_children()) > 0): 
                         possible_tree.append(t)
 
@@ -48,8 +48,12 @@ class algorithm(Board):
         self.mov(possible_moves[x].value  , possible_moves[x].get_position() ,pos)
     
     def AI(self):
-        self.minimax( 2 , True)  
-        
+        depth = 2
+        if Move.player_team == 'b':
+            self.minimax( depth , False)  
+        else:
+            self.minimax( depth , True)      
+    
         self.mov(self.bestmove_val , self.bestmove_pos ,self.bestmove_des) 
 
     def move(self): 
@@ -117,10 +121,10 @@ class algorithm(Board):
                     for x in range (0 , 8):
                         for y in range (0 , 8):
                             Board.board[x][y] = temp_board[x][y]  
-        
-            for x in range (0 , 8):
-                for y in range (0 , 8):
-                    Board.board[x][y] = temp_board[x][y]
+
+        for x in range (0 , 8):
+            for y in range (0 , 8):
+                Board.board[x][y] = temp_board[x][y] 
         
         if ismaxing: 
             return maxmove 
