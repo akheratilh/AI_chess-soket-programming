@@ -49,5 +49,12 @@ class Evaluation(Board):
                         value *= -1
                         
                     self.temp[x][y] += value
+    def get_score(self):
+        value = 0
+        for x in range(0,8):
+            for y in range (0 , 8):
+                value += self.temp[x][y]
+        return value
+
 
 # THIS CLASS DOES NOT COMPLITE YET

@@ -10,7 +10,8 @@ class sock():
         self.host = '127.0.0.1'
         self.port = 50010
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        #self.s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        self.s.settimeout( 7.0)
     def send(self):
         try:
             self.s.connect((self.host, self.port)) 

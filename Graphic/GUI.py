@@ -71,7 +71,7 @@ class GUI():
                         else :
                             Sound.mute = False
                     if event.key == pygame.K_r:
-                        chess_board.reset_board(team1) 
+                        chess_board.reset_board(team2) 
                         history = []
                         t.reset()
                         p1.next_round()
@@ -120,9 +120,7 @@ class GUI():
             if not drag:
                 animation.highlight(pygame.mouse.get_pos())
                 
-            if algorithm.check:
-                pygame.draw.rect(screen, RED, (100 * algorithm.king_X_pos, 100 * algorithm.king_Y_pos, 100, 100), 5)
-             
+
             chess_board.draw_piece()
 
             if drag:                                        # i check drag two time beacuse if i merge them then in the result the draged piece show under enemy solder
@@ -130,12 +128,13 @@ class GUI():
                    
             if (p1.can_move()):
                 threading.Thread(target=p1.move).start()
-                #p1.move()
+                
                 p1.next_round()
                 p2.next_round()       
-
-            #animation.king_check([3 , 0])  use this func as shown kings 
-
+            
+            if algorithm.check:
+                pygame.draw.rect(screen, RED, (100 * algorithm.king_X_pos, 100 * algorithm.king_Y_pos, 100, 100), 5)
+             
             pygame.display.flip()
             clock.tick(40)     
         pygame.quit()
