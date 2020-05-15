@@ -47,12 +47,15 @@ class algorithm(Board):
         
         self.mov(possible_moves[x].value  , possible_moves[x].get_position() ,pos)
     
-    def AI(self):
+    def AI(self): 
         depth = 2
-        if Move.player_team == 'b':
+        if Move.player_team == 'b': #if AI is black 
             self.minimax( depth , False)  
-        else:
+            print 'b'
+        else:                       #if AI is white
             self.minimax( depth , True)      
+            print 'w'
+        
     
         self.mov(self.bestmove_val , self.bestmove_pos ,self.bestmove_des) 
 
@@ -87,12 +90,18 @@ class algorithm(Board):
             return e.get_score()
          
         elif(ismaxing):
-            possible_moves = self.get_possible_moves()  
+            if Move.player_team ==  'b':
+                Move.player_team = 'w'
+                possible_moves = self.get_possible_moves()  
+                Move.player_team = 'b'
+            else :
+                possible_moves = self.get_possible_moves()  
+
             for pieces in possible_moves: 
-                for possible_move in pieces.get_children():
+                for possible_move in pieces.get_children(): 
                     self.mov(pieces.value ,pieces.get_position() , possible_move )                  
                     bm = self.minimax(depth -1 , False ) 
-                    if maxmove > bm:
+                    if maxmove > bm and Move.player_team == 'w' :
                         maxmove = bm 
                         self.bestmove_val = pieces.value
                         self.bestmove_pos = pieces.get_position()
@@ -102,22 +111,22 @@ class algorithm(Board):
                             Board.board[x][y] = temp_board[x][y]                
                     
         elif(not ismaxing):
-            if Move.player_team ==  'b':
-                Move.player_team = 'w'
-                possible_moves = self.get_possible_moves()  
-                Move.player_team = 'b'
-
-            elif Move.player_team ==  'w':
+            if Move.player_team ==  'w':
                 Move.player_team = 'b'
                 possible_moves = self.get_possible_moves()  
                 Move.player_team = 'w'
+            else:
+                possible_moves = self.get_possible_moves()  
 
             for pieces in possible_moves: 
                 for possible_move in pieces.get_children():
                     self.mov(pieces.value ,pieces.get_position() , possible_move )  
                     bm = self.minimax( depth -1 , True )
-                    if minmove < bm:
-                        minmove = bm                
+                    if minmove < bm and Move.player_team == 'b':
+                        minmove = bm     
+                        self.bestmove_val = pieces.value
+                        self.bestmove_pos = pieces.get_position()
+                        self.bestmove_des = possible_move                                   
                     for x in range (0 , 8):
                         for y in range (0 , 8):
                             Board.board[x][y] = temp_board[x][y]  

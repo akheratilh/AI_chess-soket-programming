@@ -21,10 +21,12 @@ class GUI():
         isSockOn = 'AI'
         if len(sys.argv) > 2 :
             isSockOn = sys.argv[2] 
+
         if len(sys.argv) > 1:
             team2 = sys.argv[1]
             if sys.argv[1] == 'black':
                 team1 = 'white'
+                
         chess_board = Board(team2)
 
         chess_board.set_template('wood')
