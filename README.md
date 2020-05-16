@@ -1,5 +1,5 @@
 # AI_chess
-
+## still in progress
 ## run with python 2.7.17
 
 you can change background by changing chess_board.set_template('wood') argument (wood or normal) from GUI.py file
