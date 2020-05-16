@@ -19,3 +19,4 @@ remmeber to type above command on another pc with different color <br />
 ## normal
 ![normal img](https://github.com/akherati56/AI_chess/blob/master/git-image/normal.jpg)
 
+test
