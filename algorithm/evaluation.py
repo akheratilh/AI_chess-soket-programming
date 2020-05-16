@@ -35,15 +35,15 @@ class Evaluation(Board):
                     if(pieces[2:] == 'pawn'):
                         value = 10
                     elif(pieces[2:] == 'knight'):
-                        value = 20                    
+                        value = 50                    
                     elif(pieces[2:] == 'bishop'):
-                        value = 30
+                        value = 80
                     elif(pieces[2:] == 'rook'):
-                        value = 40
+                        value = 150
                     elif(pieces[2:] == 'queen'):
-                        value = 100
+                        value = 350
                     elif(pieces[2:] == 'king'):
-                        value = 10000    
+                        value = 15000    
                                                         
                     if pieces[0] == 'w':
                         value *= -1
