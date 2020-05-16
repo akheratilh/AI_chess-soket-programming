@@ -106,7 +106,7 @@ class algorithm(Board):
                         self.bestmove_val = pieces.value
                         self.bestmove_pos = pieces.get_position()
                         self.bestmove_des = possible_move
-                    if minmove > bm and Move.player_team == 'b':
+                    if maxmove > bm and Move.player_team == 'b':
                         maxmove = bm                      
                     for x in range (0 , 8):
                         for y in range (0 , 8):
