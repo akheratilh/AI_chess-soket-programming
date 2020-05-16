@@ -50,13 +50,10 @@ class algorithm(Board):
     def AI(self): 
         depth = 2
         if Move.player_team == 'b': #if AI is black 
-            self.minimax( depth , False)  
-            print 'b'
+            self.minimax( depth , False)   
         else:                       #if AI is white
-            self.minimax( depth , True)      
-            print 'w'
+            self.minimax( depth , True)     
         
-    
         self.mov(self.bestmove_val , self.bestmove_pos ,self.bestmove_des) 
 
     def move(self): 
@@ -94,6 +91,7 @@ class algorithm(Board):
                 Move.player_team = 'w'
                 possible_moves = self.get_possible_moves()  
                 Move.player_team = 'b'
+                print 'team bbbbbbb'
             else :
                 possible_moves = self.get_possible_moves()  
 
@@ -101,11 +99,15 @@ class algorithm(Board):
                 for possible_move in pieces.get_children(): 
                     self.mov(pieces.value ,pieces.get_position() , possible_move )                  
                     bm = self.minimax(depth -1 , False ) 
+                    print bm
                     if maxmove > bm and Move.player_team == 'w' :
                         maxmove = bm 
+                        
                         self.bestmove_val = pieces.value
                         self.bestmove_pos = pieces.get_position()
                         self.bestmove_des = possible_move
+                    if minmove > bm and Move.player_team == 'b':
+                        maxmove = bm                      
                     for x in range (0 , 8):
                         for y in range (0 , 8):
                             Board.board[x][y] = temp_board[x][y]                
@@ -115,6 +117,7 @@ class algorithm(Board):
                 Move.player_team = 'b'
                 possible_moves = self.get_possible_moves()  
                 Move.player_team = 'w'
+                print 'team wwwwwwww'
             else:
                 possible_moves = self.get_possible_moves()  
 
@@ -122,11 +125,16 @@ class algorithm(Board):
                 for possible_move in pieces.get_children():
                     self.mov(pieces.value ,pieces.get_position() , possible_move )  
                     bm = self.minimax( depth -1 , True )
+                    print bm
                     if minmove < bm and Move.player_team == 'b':
                         minmove = bm     
+                        
                         self.bestmove_val = pieces.value
                         self.bestmove_pos = pieces.get_position()
-                        self.bestmove_des = possible_move                                   
+                        self.bestmove_des = possible_move      
+                    if minmove < bm and Move.player_team == 'w':
+                        minmove = bm     
+
                     for x in range (0 , 8):
                         for y in range (0 , 8):
                             Board.board[x][y] = temp_board[x][y]  
@@ -136,7 +144,9 @@ class algorithm(Board):
                 Board.board[x][y] = temp_board[x][y] 
         
         if ismaxing: 
+            
             return maxmove 
         else : 
+            
             return minmove
 
